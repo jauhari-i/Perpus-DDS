@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 
 export default class component extends Component {
-  render() {
-    return (
-      <div>
-        <h1>Hello World</h1>
-      </div>
-    );
-  }
+    render() {
+        return <div>{this.props.location.pathname}</div>;
+    }
 }
