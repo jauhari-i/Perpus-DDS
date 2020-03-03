@@ -13,6 +13,8 @@ const Routes = () => {
         <Route exact path="/peminjam/:id" component={pages.Peminjam} />
         <Route exact path="/petugas/:id" component={pages.Petugas} />
         <Route exact path="/anggota/:id" component={pages.Anggota} />
+        <Route exact path="/login" component={pages.Login} />
+        <Route exact path="/register" component={pages.Register} />
         <Route component={pages.Error404} />
       </Switch>
     </BrowserRouter>
