@@ -1,0 +1,108 @@
+{
+  "name": "codebase-backend",
+  "version": "1.0.0",
+  "description": "Repo for codebase backend",
+  "main": "index.js",
+  "engines": {
+    "node": "8.9.3"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "junit": "_mocha \"test/**/*_test.js\" --timeout=5000 --reporter mocha-junit-reporter",
+    "test": "mocha \"test/**/*_test.js\" --timeout=5000 --exit",
+    "cover": "nyc _mocha \"test/**/*_test.js\" --recursive --exit",
+    "slint": "sonarlint --src 'bin/**' --tests 'test/**'",
+    "lint": "eslint bin test",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.playcourt.id/telkomdev/codebase-backend"
+  },
+  "keywords": [
+    "codebase",
+    "api",
+    "backend",
+    "nodejs",
+    "telkom"
+  ],
+  "author": "Telkom Indonesia",
+  "license": "(ISC OR GPL-3.0)",
+  "bugs": {
+    "url": "https://gitlab.playcourt.id/telkomdev/api-mockup-management/issues"
+  },
+  "homepage": "https://gitlab.playcourt.id/telkomdev/api-mockup-management#readme",
+  "dependencies": {
+    "aws-sdk": "^2.304.0",
+    "azure-storage": "^2.10.3",
+    "confidence": "^3.0.2",
+    "crypto": "^1.0.1",
+    "dotenv": "^6.1.0",
+    "elasticsearch": "^15.4.1",
+    "events": "1.1.1",
+    "joi": "^14.0.1",
+    "jsftp": "2.0.0",
+    "jsonwebtoken": "^8.3.0",
+    "mongodb": "^3.1.10",
+    "mysql": "^2.15.0",
+    "nodemon": "^1.19.0",
+    "passport": "0.4.0",
+    "passport-http": "0.3.0",
+    "pg": "^7.11.0",
+    "query-string": "5.0.1",
+    "raven": "2.2.1",
+    "request": "^2.88.0",
+    "request-promise": "4.2.2",
+    "restify": "^8.3.3",
+    "restify-cors-middleware": "^1.1.1",
+    "restify-errors": "^8.0.0",
+    "rewire": "^4.0.1",
+    "serve-static-restify": "^3.0.0",
+    "util": "0.10.3",
+    "uuid": "3.1.0",
+    "validate.js": "0.12.0",
+    "winston": "^3.1.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "chai": "^4.1.2",
+    "eslint": "^5.8.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-react": "^7.11.1",
+    "hippie": "^0.5.2",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.0.0",
+    "mocha-junit-reporter": "^1.17.0",
+    "nyc": "^14.1.1",
+    "pre-commit": "^1.2.2",
+    "sinon": "^4.2.2",
+    "sonarlint": "^1.1.0"
+  },
+  "nyc": {
+    "lines": 10,
+    "statements": 10,
+    "functions": 10,
+    "branches": 10,
+    "check-coverage": true,
+    "include": [
+      "bin/**/*.js"
+    ],
+    "exclude": [
+      "index.js",
+      "bin/api/app/server.js"
+    ],
+    "reporter": [
+      "html",
+      "text",
+      "lcov",
+      "text-summary"
+    ],
+    "all": true,
+    "cache": true,
+    "report-dir": "./coverage"
+  },
+  "pre-commit": [
+    "lint"
+  ]
+}
