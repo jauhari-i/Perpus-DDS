@@ -105,7 +105,7 @@ class component extends React.Component {
           color="primary"
           className={classes.submit}
         >
-          Sign In
+          Login
         </Button>
         <Grid container justify="flex-end">
           <Grid item>

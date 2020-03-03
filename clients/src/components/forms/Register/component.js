@@ -13,6 +13,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import FormControl from "@material-ui/core/FormControl";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const styles = theme => ({
   form: {
@@ -25,6 +26,9 @@ const styles = theme => ({
 
   fcWidth: {
     width: "100%"
+  },
+  buttonProgress: {
+    color: "#fff"
   }
 });
 
@@ -181,7 +185,7 @@ class component extends React.Component {
           color="primary"
           className={classes.submit}
         >
-          Sign Up
+          <CircularProgress className={classes.buttonProgress} />
         </Button>
         <Grid container justify="flex-end">
           <Grid item>
