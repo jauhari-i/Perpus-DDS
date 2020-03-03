@@ -1,3 +1,4 @@
+// Dummy data (gunakan untuk percobaan function)
 let anggota = [
   {
     kode_anggota: "AG0123",
@@ -25,14 +26,15 @@ let anggota = [
   }
 ];
 
+// Function mulai sini!
 export const _GetAnggotaAll = () => {
   return {
     data: anggota
   };
 };
 
-export const _GetAnggotaById = kode => {
-  let data = anggota.find(({ kode_anggota }) => kode_anggota === kode);
+export const _GetAnggotaById = id => {
+  let data = anggota.find(({ kode_anggota }) => kode_anggota === id);
   return {
     data: data
   };
@@ -50,20 +52,20 @@ export const _AddAnggota = data => {
   };
 };
 
-export const _DeleteAnggota = i => {
-  anggota.splice(i, 1);
-  return {
-    data: anggota
-  };
-};
-
-export const _EditAnggota = ({ i, data }) => {
-  anggota.splice(i, 1, {
+export const _EditAnggota = ({ id, data }) => {
+  anggota.splice(id, 1, {
     kode_anggota: data.kode_anggota,
     nama_anggota: data.nama_anggota,
     alamat: data.alamat,
     telepon: data.telepon
   });
+  return {
+    data: anggota
+  };
+};
+
+export const _DeleteAnggota = id => {
+  anggota.splice(id, 1);
   return {
     data: anggota
   };

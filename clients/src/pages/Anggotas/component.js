@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import {
   _GetAnggotaAll,
   _AddAnggota,
-  _DeleteAnggota,
-  _EditAnggota
+  _EditAnggota,
+  _DeleteAnggota
 } from "../../function/anggotaFunction";
 export default class component extends Component {
   constructor(props) {
@@ -31,21 +31,21 @@ export default class component extends Component {
     this.setState({ anggota: post.data });
   }
 
-  onClickFunctionDelete(i) {
-    let deletes = _DeleteAnggota(i);
+  onClickFunctionDelete(id) {
+    let deletes = _DeleteAnggota(id);
     this.setState({
       anggota: deletes.data
     });
   }
 
-  onClickFunctionEdit(i) {
+  onClickFunctionEdit(id) {
     const data = {
       kode_anggota: "AG0203",
       nama_anggota: "Backend",
       alamat: "Backend Mana?",
       telepon: "081237492813"
     };
-    let put = _EditAnggota({ i, data });
+    let put = _EditAnggota({ id, data });
     this.setState({
       anggota: put.data
     });
@@ -53,8 +53,8 @@ export default class component extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={e => this.onClickFunction()}>Add</button>
+      <section>
+        <button onClick={() => this.onClickFunction()}>Add</button>
         <table>
           <tr>
             <th>Kode</th>
@@ -63,22 +63,24 @@ export default class component extends Component {
             <th>Kode</th>
             <th>Opsi</th>
           </tr>
-          {this.state.anggota.map((item, i) => (
-            <tr key={i}>
+          {this.state.anggota.map((item, id) => (
+            <tr key={id}>
               <td>{item.kode_anggota}</td>
               <td>{item.nama_anggota}</td>
               <td>{item.alamat}</td>
               <td>{item.telepon}</td>
               <td>
-                <button onClick={e => this.onClickFunctionDelete(i)}>
+                <button onClick={() => this.onClickFunctionDelete(id)}>
                   Delete
                 </button>
-                <button onClick={e => this.onClickFunctionEdit(i)}>Edit</button>
+                <button onClick={() => this.onClickFunctionEdit(id)}>
+                  Edit
+                </button>
               </td>
             </tr>
           ))}
         </table>
-      </div>
+      </section>
     );
   }
 }

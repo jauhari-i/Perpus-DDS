@@ -1,7 +1,66 @@
 import React, { Component } from "react";
+import {
+  _GetPeminjamAll,
+  _AddPeminjam,
+  _EditPeminjam,
+  _DeletePeminjam
+} from "../../function/peminjamFunction";
 
 export default class component extends Component {
-    render() {
-        return <div>{this.props.location.pathname}</div>;
-    }
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      peminjam: []
+    };
+  }
+
+  componentDidMount() {
+    // Untuk function _GetPeminjamAll()
+  }
+
+  onClickFunction() {
+    // Untuk function _AddPeminjam()
+  }
+
+  onClickFunctionDelete(id) {
+    // Untuk function _DeletePeminjam()
+  }
+
+  onClickFunctionEdit(id) {
+    // Untuk function _EditPeminjam()
+  }
+
+  render() {
+    return (
+      <section>
+        <button onClick={() => this.onClickFunction()}>Add</button>
+        <table>
+          <tr>
+            <th>No. Pinjam</th>
+            <th>Nama Anggota</th>
+            <th>Nama Petugas</th>
+            <th>Tanggal Pinjam</th>
+            <th>Opsi</th>
+          </tr>
+          {this.state.peminjam.map((item, id) => (
+            <tr key={id}>
+              <td>{item.no_pinjam}</td>
+              <td>{item.nama_anggota}</td>
+              <td>{item.nama_petugas}</td>
+              <td>{item.tgl_pinjam}</td>
+              <td>
+                <button onClick={() => this.onClickFunctionDelete(id)}>
+                  Delete
+                </button>
+                <button onClick={() => this.onClickFunctionEdit(id)}>
+                  Edit
+                </button>
+              </td>
+            </tr>
+          ))}
+        </table>
+      </section>
+    );
+  }
 }
