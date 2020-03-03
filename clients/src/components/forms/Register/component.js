@@ -33,9 +33,16 @@ class component extends React.Component {
     super(props);
     this.state = {
       showPassword: false,
-      password: ""
+      showPasswordConfirm: false,
+      password: "",
+      nama: "",
+      email: "",
+      password2: ""
     };
     this.handleClickShowPassword = this.handleClickShowPassword.bind(this);
+    this.handleClickShowPasswordConfirm = this.handleClickShowPasswordConfirm.bind(
+      this
+    );
   }
 
   handleClickShowPassword() {
@@ -44,20 +51,32 @@ class component extends React.Component {
     });
   }
 
+  handleClickShowPasswordConfirm() {
+    this.setState({
+      showPasswordConfirm: !this.state.showPasswordConfirm
+    });
+  }
+
   handleMouseDownPassword(e) {
     e.preventDefault();
   }
 
-  handleChange(e) {
+  handleChangePassword(e) {
     this.setState({
       password: e.target.value
+    });
+  }
+
+  handleChangePasswordConfirm(e) {
+    this.setState({
+      password2: e.target.value
     });
   }
 
   render() {
     const { classes } = this.props;
     return (
-      <form className={classes.form} noValidate>
+      <form className={classes.form}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
@@ -84,14 +103,15 @@ class component extends React.Component {
           </Grid>
           <Grid item xs={12}>
             <FormControl className={classes.fcWidth} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-password">
-                Password
-              </InputLabel>
+              <InputLabel htmlFor="password">Password</InputLabel>
               <OutlinedInput
-                id="outlined-adornment-password"
+                id="password"
                 type={this.state.showPassword ? "text" : "password"}
-                onChange={e => this.handleChange(e)}
+                onChange={e => this.handleChangePassword(e)}
                 value={this.state.password}
+                label="Password"
+                name="password"
+                required
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -113,20 +133,43 @@ class component extends React.Component {
             </FormControl>
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              variant="outlined"
-              required
-              fullWidth
-              name="passwordConfirm"
-              label="Confirm Password"
-              type="password"
-              id="password2"
-              autoComplete="current-password"
-            />
+            <FormControl className={classes.fcWidth} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Confirm Password
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                type={this.state.showPasswordConfirm ? "text" : "password"}
+                onChange={e => this.handleChangePasswordConfirm(e)}
+                name="confirmPass"
+                label="Confirm Password"
+                required
+                value={this.state.password2}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={this.handleClickShowPasswordConfirm}
+                      onMouseDown={this.handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {this.state.showPasswordConfirm ? (
+                        <Visibility />
+                      ) : (
+                        <VisibilityOff />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                labelWidth={70}
+              />
+            </FormControl>
           </Grid>
           <Grid item xs={12}>
             <FormControlLabel
-              control={<Checkbox value="allowExtraEmails" color="primary" />}
+              control={
+                <Checkbox required value="allowExtraEmails" color="primary" />
+              }
               label="I agree"
             />
           </Grid>
