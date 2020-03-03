@@ -18,6 +18,7 @@ const styles = theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
+    padding: theme.spacing(3),
     backgroundColor: theme.palette.primary.main
   }
 });
