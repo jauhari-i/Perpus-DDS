@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import Routes from "./config/Routes";
 
-export default class App extends Component {
+export default class component extends Component {
   render() {
     return (
       <div>
-        <Routes />
+        <h1>Hello World</h1>
       </div>
     );
   }
