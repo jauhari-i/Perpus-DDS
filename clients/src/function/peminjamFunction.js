@@ -31,6 +31,15 @@ export const _GetPeminjamById = id => {
 
 export const _AddPeminjam = data => {
   // Code untuk POST / menambahkan peminjam baru
+  peminjam.push({
+    no_pinjam: data.no_pinjam,
+    nama_anggota: data.nama_anggota,
+    nama_petugas: data.nama_petugas,
+    tgl_pinjam: data.tgl_pinjam
+  });
+  return {
+    data: peminjam
+  };
 };
 
 export const _EditPeminjam = ({ id, data }) => {
