@@ -5,9 +5,11 @@ import {
   _EditAnggota,
   _DeleteAnggota
 } from "../../function/anggotaFunction";
+
 export default class component extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       anggota: []
     };
