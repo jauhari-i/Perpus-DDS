@@ -9,10 +9,11 @@ const Routes = () => {
         <Route exact path="/" component={pages.Home} />
         <Route exact path="/peminjam" component={pages.Peminjams} />
         <Route exact path="/petugas" component={pages.Petugases} />
-        <Route exact path="/anggota" component={pages.Anggotas} />
+        <Route exact path="/anggota" component={pages.Anggotas}>
+          <Route path="/:id" component={pages.Anggota} />
+        </Route>
         <Route exact path="/peminjam/:id" component={pages.Peminjam} />
         <Route exact path="/petugas/:id" component={pages.Petugas} />
-        <Route exact path="/anggota/:id" component={pages.Anggota} />
         <Route component={pages.Error404} />
       </Switch>
     </BrowserRouter>
