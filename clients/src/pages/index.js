@@ -7,6 +7,8 @@ import Petugases from "./Petugases";
 import Home from "./Home";
 import Error404 from "./Error404";
 import DummyPage from "./DummyPage";
+import Login from "./Login";
+import Register from "./Register";
 
 export const pages = {
   Home,
@@ -17,5 +19,7 @@ export const pages = {
   Peminjams,
   Petugas,
   Petugases,
-  DummyPage
+  DummyPage,
+  Login,
+  Register
 };
