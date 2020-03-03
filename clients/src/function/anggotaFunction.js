@@ -37,3 +37,34 @@ export const _GetAnggotaById = kode => {
     data: data
   };
 };
+
+export const _AddAnggota = data => {
+  anggota.push({
+    kode_anggota: data.kode_anggota,
+    nama_anggota: data.nama_anggota,
+    alamat: data.alamat,
+    telepon: data.telepon
+  });
+  return {
+    data: anggota
+  };
+};
+
+export const _DeleteAnggota = i => {
+  anggota.splice(i, 1);
+  return {
+    data: anggota
+  };
+};
+
+export const _EditAnggota = ({ i, data }) => {
+  anggota.splice(i, 1, {
+    kode_anggota: data.kode_anggota,
+    nama_anggota: data.nama_anggota,
+    alamat: data.alamat,
+    telepon: data.telepon
+  });
+  return {
+    data: anggota
+  };
+};
