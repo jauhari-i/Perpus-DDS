@@ -27,8 +27,8 @@ export default class component extends Component {
       jabatan: "Bos",
       tlpn_petugas: "081237492813"
     };
-    let post = _AddAnggota(data);
-    this.setState({ anggota: post.data });
+    let post = _AddPetugas(data);
+    this.setState({ petugas: post.data });
   }
 
   onClickFunctionDelete(id) {
@@ -44,29 +44,33 @@ export default class component extends Component {
       <section>
         <button onClick={() => this.onClickFunction()}>Add</button>
         <table>
-          <tr>
-            <th>Kode Petugas</th>
-            <th>Nama Petugas</th>
-            <th>Jabatan</th>
-            <th>No. Telepon</th>
-            <th>Opsi</th>
-          </tr>
-          {this.state.petugas.map((item, id) => (
-            <tr key={id}>
-              <td>{item.kd_petugas}</td>
-              <td>{item.nama_petugas}</td>
-              <td>{item.jabatan}</td>
-              <td>{item.tlpn_petugas}</td>
-              <td>
-                <button onClick={() => this.onClickFunctionDelete(id)}>
-                  Delete
-                </button>
-                <button onClick={() => this.onClickFunctionEdit(id)}>
-                  Edit
-                </button>
-              </td>
+          <thead>
+            <tr>
+              <th>Kode Petugas</th>
+              <th>Nama Petugas</th>
+              <th>Jabatan</th>
+              <th>No. Telepon</th>
+              <th>Opsi</th>
             </tr>
-          ))}
+          </thead>
+          <tbody>
+            {this.state.petugas.map((item, id) => (
+              <tr key={id}>
+                <td>{item.kd_petugas}</td>
+                <td>{item.nama_petugas}</td>
+                <td>{item.jabatan}</td>
+                <td>{item.tlpn_petugas}</td>
+                <td>
+                  <button onClick={() => this.onClickFunctionDelete(id)}>
+                    Delete
+                  </button>
+                  <button onClick={() => this.onClickFunctionEdit(id)}>
+                    Edit
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </section>
     );

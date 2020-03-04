@@ -1,5 +1,5 @@
 // Dummy data (gunakan untuk percobaan function)
-let data = [
+let petugas = [
   {
     kd_petugas: "P01",
     nm_petugas: "Sabina",

@@ -58,29 +58,33 @@ export default class component extends Component {
       <section>
         <button onClick={() => this.onClickFunction()}>Add</button>
         <table>
-          <tr>
-            <th>Kode</th>
-            <th>Nama</th>
-            <th>Kode</th>
-            <th>Kode</th>
-            <th>Opsi</th>
-          </tr>
-          {this.state.anggota.map((item, id) => (
-            <tr key={id}>
-              <td>{item.kode_anggota}</td>
-              <td>{item.nama_anggota}</td>
-              <td>{item.alamat}</td>
-              <td>{item.telepon}</td>
-              <td>
-                <button onClick={() => this.onClickFunctionDelete(id)}>
-                  Delete
-                </button>
-                <button onClick={() => this.onClickFunctionEdit(id)}>
-                  Edit
-                </button>
-              </td>
+          <thead>
+            <tr>
+              <th>Kode</th>
+              <th>Nama</th>
+              <th>Kode</th>
+              <th>Kode</th>
+              <th>Opsi</th>
             </tr>
-          ))}
+          </thead>
+          <tbody>
+            {this.state.anggota.map((item, id) => (
+              <tr key={id}>
+                <td>{item.kode_anggota}</td>
+                <td>{item.nama_anggota}</td>
+                <td>{item.alamat}</td>
+                <td>{item.telepon}</td>
+                <td>
+                  <button onClick={() => this.onClickFunctionDelete(id)}>
+                    Delete
+                  </button>
+                  <button onClick={() => this.onClickFunctionEdit(id)}>
+                    Edit
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </section>
     );
