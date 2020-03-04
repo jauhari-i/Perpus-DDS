@@ -1,14 +1,9 @@
 import React, { Component } from "react";
-import Drawer from "../../components/element/Drawer";
+import Table from "../../components/element/Table";
 
 export class component extends Component {
   render() {
-    return (
-      <h1>
-        basiowajdoi o wiod ahosk lakj hawoi dlao jeiof hanlksdn oaihd oshd
-        byawidb msuaiwf alwkdj wiod
-      </h1>
-    );
+    return <Table />;
   }
 }
 
