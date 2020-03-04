@@ -37,7 +37,6 @@ export const _AddPetugas = data => {
     jabatan: data.jabatan,
     tlpn_petugas: data.tlpn_petugas
   });
-  console.log(petugas);
   return {
     data: petugas
   };
