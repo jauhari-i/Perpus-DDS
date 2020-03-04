@@ -31,6 +31,15 @@ export const _GetPetugasById = id => {
 
 export const _AddPetugas = data => {
   // Code untuk POST / menambahkan petugas baru
+  petugas.push({
+    kd_petugas: data.kd_petugas,
+    nm_petugas: data.nm_petugas,
+    jabatan: data.jabatan,
+    tlpn_petugas: data.tlpn_petugas
+  });
+  return {
+    data: petugas
+  };
 };
 
 export const _EditPetugas = ({ id, data }) => {

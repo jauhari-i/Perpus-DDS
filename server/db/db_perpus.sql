@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Mar 2020 pada 11.47
+-- Waktu pembuatan: 04 Mar 2020 pada 00.59
 -- Versi server: 10.1.36-MariaDB
 -- Versi PHP: 7.2.11
 
@@ -32,15 +32,17 @@ CREATE TABLE `anggota` (
   `kd_anggota` char(10) NOT NULL,
   `nm_anggota` varchar(30) NOT NULL,
   `alamat` varchar(30) NOT NULL,
-  `tlpn` varchar(30) NOT NULL
+  `tlpn` varchar(30) NOT NULL,
+  `email_anggota` varchar(50) NOT NULL,
+  `ps_anggota` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `anggota`
 --
 
-INSERT INTO `anggota` (`kd_anggota`, `nm_anggota`, `alamat`, `tlpn`) VALUES
-('AG0001', 'Aufa', 'Kras', '085546123055');
+INSERT INTO `anggota` (`kd_anggota`, `nm_anggota`, `alamat`, `tlpn`, `email_anggota`, `ps_anggota`) VALUES
+('AG0001', 'Aufa', 'Kras', '085546123055', 'mocha@gmail.com', 'upnormal');
 
 --
 -- Trigger `anggota`
@@ -140,15 +142,17 @@ CREATE TABLE `petugas` (
   `kd_petugas` char(10) NOT NULL,
   `nm_petugas` varchar(30) NOT NULL,
   `jabatan` varchar(30) NOT NULL,
-  `tlpn_petugas` varchar(30) NOT NULL
+  `tlpn_petugas` varchar(30) NOT NULL,
+  `email_petugas` varchar(50) NOT NULL,
+  `ps_petugas` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `petugas`
 --
 
-INSERT INTO `petugas` (`kd_petugas`, `nm_petugas`, `jabatan`, `tlpn_petugas`) VALUES
-('P01', 'Aufa', 'Bos', '08555789765');
+INSERT INTO `petugas` (`kd_petugas`, `nm_petugas`, `jabatan`, `tlpn_petugas`, `email_petugas`, `ps_petugas`) VALUES
+('P01', 'Aufa', 'Bos', '08555789765', 'mocha@gmail.com', 'upnormal');
 
 --
 -- Trigger `petugas`

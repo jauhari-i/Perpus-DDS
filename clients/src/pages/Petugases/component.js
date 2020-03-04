@@ -21,6 +21,14 @@ export default class component extends Component {
 
   onClickFunction() {
     // Untuk function _AddPetugas()
+    const data = {
+      kd_petugas: "P04",
+      nm_petugas: "Aufak",
+      jabatan: "Bos",
+      tlpn_petugas: "081237492813"
+    };
+    let post = _AddAnggota(data);
+    this.setState({ anggota: post.data });
   }
 
   onClickFunctionDelete(id) {
