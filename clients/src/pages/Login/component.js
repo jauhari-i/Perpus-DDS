@@ -24,9 +24,6 @@ const styles = theme => ({
 });
 
 class component extends Component {
-  state = {
-    loged: false
-  };
   render() {
     const { classes } = this.props;
     return (

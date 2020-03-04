@@ -1,13 +1,13 @@
 
-const Project = require('./domain');
-const Mongo = require('../../../../helpers/databases/mongodb/db');
+const Halo = require('./domain');
+const Sql = require('../../../../helpers/databases/mysql/db');
 const config = require('../../../../infra/configs/global_config');
-const db = new Mongo(config.get('/mongoDbUrl'));
-const project = new Project(db);
+const db = new Sql(config.get('/sqlDbUrl'));
+const gets = new Halo(db);
 
-const getProjectList = async () => {
+const getUser = async (userId) => {
   const getData = async () => {
-    const result = await project.viewProjectList();
+    const result = await gets.lihatAnggota(userId);
     return result;
   };
   const result = await getData();
@@ -15,5 +15,5 @@ const getProjectList = async () => {
 };
 
 module.exports = {
-  getProjectList
+  getUser
 };

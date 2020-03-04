@@ -1,32 +1,24 @@
 
 const Query = require('./query');
-const queryModel = require('./query_model');
 const wrapper = require('../../../../helpers/utils/wrapper');
 const { NotFoundError } = require('../../../../helpers/error');
 
-class Project {
+class Anggota {
 
   constructor(db){
     this.query = new Query(db);
   }
 
-  async viewProjectList() {
-    const project = await this.query.findMany();
-    if (project.err) {
-      return wrapper.error(new NotFoundError('Can not find list project'));
+  async lihatAnggota(userId) {
+    const dbOutput = await this.query.findMany({});
+    
+    if (dbOutput.err) {
+      return wrapper.error(new NotFoundError('Data tidak ada wow'));
     }
 
-    const result = [];
-    project.data.map(i => {
-      const listProject = queryModel.project();
-      listProject.projectId = i.id;
-      listProject.projectName = i.nameProject;
-      result.push(listProject);
-    });
-
-    return wrapper.data(result);
+    return wrapper.data(dbOutput);
   }
 
 }
 
-module.exports = Project;
+module.exports = Anggota;
