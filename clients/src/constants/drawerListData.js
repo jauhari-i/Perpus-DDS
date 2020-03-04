@@ -15,3 +15,5 @@ const drawerListData = [
     url: "/petugas"
   }
 ];
+
+export default drawerListData;

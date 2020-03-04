@@ -15,8 +15,10 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+// import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import GroupIcon from "@material-ui/icons/Group";
+import BookmarkIcon from "@material-ui/icons/Bookmark";
+import drawerListData from "../../../constants/drawerListData";
 
 const drawerWidth = 240;
 
@@ -28,7 +30,10 @@ const useStyles = makeStyles(theme => ({
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
+    backgroundColor: "#fff",
+    boxShadow: "none",
+    color: "#000"
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -49,14 +54,15 @@ const useStyles = makeStyles(theme => ({
     flexShrink: 0
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
+    backgroundColor: "#444444"
   },
   drawerHeader: {
     display: "flex",
     alignItems: "center",
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
-    justifyContent: "flex-end"
+    justifyContent: "space-between"
   },
   content: {
     flexGrow: 1,
@@ -73,6 +79,9 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.enteringScreen
     }),
     marginLeft: 0
+  },
+  listItem: {
+    color: "#fff"
   }
 }));
 
@@ -108,7 +117,11 @@ export default function component(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography
+            variant="h6"
+            noWrap
+            className={clsx(open && classes.hide)}
+          >
             Perpustakaan DDS
           </Typography>
         </Toolbar>
@@ -122,8 +135,14 @@ export default function component(props) {
           paper: classes.drawerPaper
         }}
       >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
+        <div
+          className={classes.drawerHeader}
+          style={{ backgroundColor: "#333333" }}
+        >
+          <Typography variant="h6" noWrap className={classes.listItem}>
+            Perpustakaan DDS
+          </Typography>
+          <IconButton onClick={handleDrawerClose} className={classes.listItem}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
             ) : (
@@ -133,12 +152,16 @@ export default function component(props) {
         </div>
         <Divider />
         <List>
-          {["Peminjaman", "Anggota", "Petugas"].map((text, index) => (
-            <ListItem button key={text}>
+          {drawerListData.map((item, index) => (
+            <ListItem button key={index}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {index === 0 ? (
+                  <BookmarkIcon className={classes.listItem} />
+                ) : (
+                  <GroupIcon className={classes.listItem} />
+                )}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={item.name} className={classes.listItem} />
             </ListItem>
           ))}
         </List>
