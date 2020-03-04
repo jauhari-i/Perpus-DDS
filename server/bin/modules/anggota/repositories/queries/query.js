@@ -8,13 +8,13 @@ class Query {
   }
 
   async findOneUser(parameter) {
-    this.db.setCollection('project');
+    this.db.setCollection('dataku');
     const recordset = await this.db.findOne(parameter);
     return recordset;
   }
 
   async findById(id) {
-    this.db.setCollection('project');
+    this.db.setCollection('dataku');
     const parameter = {
       _id: ObjectId(id)
     };
@@ -22,9 +22,9 @@ class Query {
     return recordset;
   }
 
-  async findMany(parameter) {
-    this.db.setCollection('project');
-    const recordset = await this.db.findMany(parameter);
+  async findMany(id) {
+    this.db.setCollection('dataku');
+    const recordset = await this.db.findMany(id);
     return recordset;
   }
 
