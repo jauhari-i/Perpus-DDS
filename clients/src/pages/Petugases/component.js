@@ -3,7 +3,8 @@ import {
   _GetPetugasAll,
   _AddPetugas,
   _EditPetugas,
-  _DeletePetugas
+  _DeletePetugas,
+  _GetPetugasById
 } from "../../function/petugasFunction";
 
 export default class component extends Component {
@@ -17,6 +18,10 @@ export default class component extends Component {
 
   componentDidMount() {
     // Untuk function _GetPetugasAll()
+    console.log(_GetPetugasAll());
+    this.setState({
+      petugas: _GetPetugasAll().data
+    });
   }
 
   onClickFunction() {

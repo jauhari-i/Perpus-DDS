@@ -17,6 +17,10 @@ export default class component extends Component {
 
   componentDidMount() {
     // Untuk function _GetPeminjamAll()
+    console.log(_GetPeminjamAll());
+    this.setState({
+      peminjam: _GetPeminjamAll().data
+    });
   }
 
   onClickFunction() {

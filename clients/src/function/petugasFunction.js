@@ -23,10 +23,17 @@ let petugas = [
 // Function mulai sini!
 export const _GetPetugasAll = () => {
   // Code untuk GET all petugas
+  return {
+    data: petugas
+  }
 };
 
 export const _GetPetugasById = id => {
   // Code untuk GET petugas berdasarkan id (kd petugas)
+  let data = petugas.find(({ kd_petugas}) => kd_petugas === id);
+  return{
+    data: data
+  };
 };
 
 export const _AddPetugas = data => {

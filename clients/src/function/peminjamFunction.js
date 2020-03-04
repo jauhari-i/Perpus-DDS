@@ -23,10 +23,17 @@ let peminjam = [
 // Function mulai sini!
 export const _GetPeminjamAll = () => {
   // Code untuk GET all peminjam
+  return {
+    data: peminjam
+  }
 };
 
 export const _GetPeminjamById = id => {
   // Code untuk GET peminjam berdasarkan id (no pinjam)
+  let data = peminjam.find(({ no_pinjam}) => no_pinjam === id);
+  return {
+    data: data
+  };
 };
 
 export const _AddPeminjam = data => {
