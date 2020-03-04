@@ -43,7 +43,7 @@ class component extends React.Component {
       nama: "",
       email: "",
       password2: "",
-      agree: false,
+      agree: "",
       loading: false,
       errorAll: false,
       errorAllMsg: "Fill all field",
@@ -105,6 +105,12 @@ class component extends React.Component {
         });
     this.setState({
       password2: e.target.value
+    });
+  }
+
+  handleChangeAgree(e) {
+    this.setState({
+      agree: e.target.value
     });
   }
 
@@ -214,7 +220,12 @@ class component extends React.Component {
           <Grid item xs={12}>
             <FormControlLabel
               control={
-                <Checkbox required value="allowExtraEmails" color="primary" />
+                <Checkbox
+                  onChange={e => this.handleChangeAgree(e)}
+                  required
+                  value="agree"
+                  color="primary"
+                />
               }
               label={
                 <div>
@@ -246,7 +257,7 @@ class component extends React.Component {
         </Button>
         <Grid container justify="flex-end">
           <Grid item>
-            <Link to="/login" variant="body2">
+            <Link href="/login" variant="body2">
               Already have an account? Sign in
             </Link>
           </Grid>
