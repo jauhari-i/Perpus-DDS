@@ -27,8 +27,8 @@ export default class component extends Component {
       jabatan: "Bos",
       tlpn_petugas: "081237492813"
     };
-    let post = _AddAnggota(data);
-    this.setState({ anggota: post.data });
+    let post = _AddPetugas(data);
+    this.setState({ petugas: post.data });
   }
 
   onClickFunctionDelete(id) {
