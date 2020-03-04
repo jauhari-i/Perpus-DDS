@@ -8,7 +8,7 @@ export class Routes extends Component {
     super(props);
 
     this.state = {
-      isLoggedIn: true
+      isLoggedIn: false
     };
   }
 
@@ -42,7 +42,7 @@ export class Routes extends Component {
   render() {
     return (
       <BrowserRouter>
-        {this.state.isLoggedIn ? this._RenderApp() : this._RenderLogin}
+        {this.state.isLoggedIn ? this._RenderApp() : this._RenderLogin()}
       </BrowserRouter>
     );
   }
