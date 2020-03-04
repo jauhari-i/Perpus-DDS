@@ -37,11 +37,23 @@ export default class component extends Component {
   }
 
   onClickFunctionDelete(id) {
-    // Untuk function _DeletePetugas()
+    let deletes = _DeletePetugas(id);
+    this.setState({
+      petugas: deletes.data
+    });
   }
 
   onClickFunctionEdit(id) {
-    // Untuk function _EditPetugas()
+    const data = {
+      kd_petugas: "P04",
+      nm_petugas: "FUCEK",
+      jabatan: "NGUDEK KOPI",
+      tlpn_petugas: "081237492812"
+    };
+    let put = _EditPetugas({ id, data });
+    this.setState({
+      petugas: put.data
+    });
   }
 
   render() {
