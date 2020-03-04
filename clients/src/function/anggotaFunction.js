@@ -64,9 +64,7 @@ export const _EditAnggota = ({ id, data }) => {
   };
 };
 
-export const _DeleteAnggota = id => {
-  anggota.splice(id, 1);
-  return {
-    data: anggota
-  };
+export const _DeleteAnggota = oldData => {
+  anggota.splice(anggota.indexOf(oldData), 1);
+  return { data: anggota };
 };

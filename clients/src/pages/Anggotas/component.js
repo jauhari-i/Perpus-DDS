@@ -7,6 +7,8 @@ import {
 } from "../../function/anggotaFunction";
 import Table from "../../components/element/Table";
 import { tableColumn } from "../../constants/Table";
+import { anggota } from "../../function/anggotaFunction";
+import { tableFunction } from "../../function/tableFunction";
 
 export default class component extends Component {
   constructor(props) {
@@ -18,13 +20,12 @@ export default class component extends Component {
   }
 
   componentDidMount() {
-    console.log(_GetAnggotaAll());
     this.setState({
       anggota: _GetAnggotaAll().data
     });
   }
 
-  onClickFunction() {
+  onClickFunctionAdd() {
     const data = {
       kode_anggota: "AG0203",
       nama_anggota: "Backend",
@@ -33,13 +34,6 @@ export default class component extends Component {
     };
     let post = _AddAnggota(data);
     this.setState({ anggota: post.data });
-  }
-
-  onClickFunctionDelete(id) {
-    let deletes = _DeleteAnggota(id);
-    this.setState({
-      anggota: deletes.data
-    });
   }
 
   onClickFunctionEdit(id) {
@@ -55,15 +49,18 @@ export default class component extends Component {
     });
   }
 
+  onClickFunctionDelete(oldData) {
+    const deletes = _DeleteAnggota(oldData);
+    return deletes.data;
+  }
+
   render() {
     return (
       <Table
         title="Anggota"
         columns={tableColumn.AnggotaColumn}
-        data={this.state.anggota}
-        add={this.onClickFunction}
-        edit={this.onClickFunctionEdit}
-        delete={this.onClickFunctionEdit}
+        data={anggota}
+        deletes={this.onClickFunctionDelete}
       />
     );
   }
