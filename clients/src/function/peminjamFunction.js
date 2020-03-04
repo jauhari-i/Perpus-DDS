@@ -44,9 +44,20 @@ export const _AddPeminjam = data => {
 };
 
 export const _EditPeminjam = ({ id, data }) => {
-  // Code untuk PUT / edit data peminjam berdasarkan id (no peminjam)
+  peminjam.splice(id, 1, {
+    no_pinjam: data.no_pinjam,
+    nama_anggota: data.nama_anggota,
+    nama_petugas: data.nama_petugas,
+    tgl_pinjam: data.tgl_pinjam
+  });
+  return {
+    data: peminjam
+  };
 };
 
 export const _DeletePeminjam = id => {
-  // Code untuk DELETE peminjam berdasarkan id (no peminjam)
+  peminjam.splice(id, 1);
+  return {
+    data: peminjam
+  };
 };
