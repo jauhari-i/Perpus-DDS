@@ -4,6 +4,7 @@ import { _GetPeminjamById } from "../../function/peminjamFunction";
 export default class component extends Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       peminjam: {}
     };

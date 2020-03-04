@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { pages } from "../pages";
 import Drawer from "../components/element/Drawer";
 
@@ -12,10 +12,22 @@ export class Routes extends Component {
     };
   }
 
+  componentDidMount() {
+    const login = localStorage.getItem("Login");
+    if (login) {
+      if (login === "true") {
+        this.setState({
+          isLoggedIn: true
+        });
+      }
+    }
+  }
+
   _RenderApp() {
     return (
       <Drawer>
         <Switch>
+          <Redirect from="/login" to="/" />
           <Route exact path="/" component={pages.Home} />
           <Route exact path="/test" component={pages.DummyPage} />
           <Route exact path="/peminjam" component={pages.Peminjams} />
@@ -34,7 +46,9 @@ export class Routes extends Component {
     return (
       <Switch>
         <Route exact path="/login" component={pages.Login} />
-        <Route exact path="/register" component={pages.Register} />
+        <Route>
+          <Redirect to="/login" />
+        </Route>
       </Switch>
     );
   }
