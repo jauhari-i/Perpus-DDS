@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -153,7 +154,7 @@ export default function component(props) {
         <Divider />
         <List>
           {drawerListData.map((item, index) => (
-            <ListItem button key={index}>
+            <ListItem button key={index} component={Link} to={item.url}>
               <ListItemIcon>
                 {index === 0 ? (
                   <BookmarkIcon className={classes.listItem} />

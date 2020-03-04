@@ -2,7 +2,7 @@ const drawerListData = [
   {
     name: "Peminjaman",
     icon: "Bookmark",
-    url: "/peminjaman"
+    url: "/peminjam"
   },
   {
     name: "Anggota",
