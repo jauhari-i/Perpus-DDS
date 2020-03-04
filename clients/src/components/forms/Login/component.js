@@ -140,9 +140,11 @@ class component extends React.Component {
         localStorage.setItem("Login", "true");
         if (this.state.remember === true) {
           this.handleRemember({ email, password });
+          window.location.reload();
         } else {
           localStorage.removeItem("email");
           localStorage.removeItem("password");
+          window.location.reload();
         }
       } else {
         localStorage.setItem("Login", "false");
@@ -151,7 +153,6 @@ class component extends React.Component {
   }
 
   handleChangeRemember(e) {
-    console.log(e.target.value);
     if (e.target.value) {
       this.setState({
         remember: !this.state.remember
@@ -160,7 +161,6 @@ class component extends React.Component {
   }
 
   handleRemember({ email, password }) {
-    console.log({ email, password });
     localStorage.setItem("email", email);
     localStorage.setItem("password", password);
   }

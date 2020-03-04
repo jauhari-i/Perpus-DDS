@@ -24,6 +24,9 @@ const styles = theme => ({
 });
 
 class component extends Component {
+  state = {
+    loged: false
+  };
   render() {
     const { classes } = this.props;
     return (
@@ -36,7 +39,7 @@ class component extends Component {
           <Typography component="h1" variant="h5">
             Login
           </Typography>
-          <Login type="Login" />
+          <Login type="Login" history={this.props.history} />
         </div>
         <Box mt={8}>
           <Copyright>Tefa DDS</Copyright>

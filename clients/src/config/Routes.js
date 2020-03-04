@@ -8,7 +8,7 @@ export class Routes extends Component {
     super(props);
 
     this.state = {
-      isLoggedIn: true
+      isLoggedIn: false
     };
   }
 
@@ -27,6 +27,7 @@ export class Routes extends Component {
     return (
       <Drawer>
         <Switch>
+          <Redirect from="/login" to="/" />
           <Route exact path="/" component={pages.Home} />
           <Route exact path="/test" component={pages.DummyPage} />
           <Route exact path="/peminjam" component={pages.Peminjams} />
@@ -36,7 +37,6 @@ export class Routes extends Component {
           <Route exact path="/petugas/:id" component={pages.Petugas} />
           <Route exact path="/anggota/:id" component={pages.Anggota} />
           <Route component={pages.Error404} />
-          <Redirect from="/login" to="/" />
         </Switch>
       </Drawer>
     );
