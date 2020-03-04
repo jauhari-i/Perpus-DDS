@@ -14,6 +14,7 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import FormControl from "@material-ui/core/FormControl";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 const styles = theme => ({
   form: {
@@ -41,7 +42,19 @@ class component extends React.Component {
       password: "",
       nama: "",
       email: "",
-      password2: ""
+      password2: "",
+      agree: false,
+      loading: false,
+      errorAll: false,
+      errorAllMsg: "Fill all field",
+      errorName: false,
+      errorNameMsg: "",
+      errorEmail: false,
+      errorEmailMsg: "",
+      errorPass: false,
+      errorPassMsg: "",
+      errorCPass: false,
+      errorCPassMsg: ""
     };
     this.handleClickShowPassword = this.handleClickShowPassword.bind(this);
     this.handleClickShowPasswordConfirm = this.handleClickShowPasswordConfirm.bind(
@@ -72,6 +85,24 @@ class component extends React.Component {
   }
 
   handleChangePasswordConfirm(e) {
+    e.target.value !== this.state.password
+      ? this.setState({
+          errorCPass: true,
+          errorCPassMsg: "Password is not match"
+        })
+      : this.setState({
+          password2: e.target.value,
+          errorCPass: false,
+          errorCPassMsg: ""
+        });
+    e.target.value === ""
+      ? this.setState({
+          errorCPassMsg: "",
+          errorCPass: false
+        })
+      : this.setState({
+          password2: e.target.value
+        });
     this.setState({
       password2: e.target.value
     });
@@ -138,7 +169,10 @@ class component extends React.Component {
           </Grid>
           <Grid item xs={12}>
             <FormControl className={classes.fcWidth} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-password">
+              <InputLabel
+                error={this.state.errorCPass ? true : false}
+                htmlFor="outlined-adornment-password"
+              >
                 Confirm Password
               </InputLabel>
               <OutlinedInput
@@ -147,6 +181,7 @@ class component extends React.Component {
                 onChange={e => this.handleChangePasswordConfirm(e)}
                 name="confirmPass"
                 label="Confirm Password"
+                error={this.state.errorCPass ? true : false}
                 required
                 value={this.state.password2}
                 endAdornment={
@@ -167,6 +202,13 @@ class component extends React.Component {
                 }
                 labelWidth={70}
               />
+              {this.state.errorCPassMsg !== "" ? (
+                <FormHelperText error>
+                  {this.state.errorCPassMsg}
+                </FormHelperText>
+              ) : (
+                ""
+              )}
             </FormControl>
           </Grid>
           <Grid item xs={12}>
@@ -174,7 +216,18 @@ class component extends React.Component {
               control={
                 <Checkbox required value="allowExtraEmails" color="primary" />
               }
-              label="I agree"
+              label={
+                <div>
+                  <span>I agree to the </span>
+                  <Link
+                    href="https://www.termsfeed.com/terms-conditions/c4152b0db055858686b2f4e5700f817a"
+                    target="_blank"
+                    variant="body2"
+                  >
+                    Terms and Condition
+                  </Link>
+                </div>
+              }
             />
           </Grid>
         </Grid>
@@ -185,11 +238,15 @@ class component extends React.Component {
           color="primary"
           className={classes.submit}
         >
-          <CircularProgress className={classes.buttonProgress} />
+          {this.state.loading ? (
+            <CircularProgress className={classes.buttonProgress} />
+          ) : (
+            "Register"
+          )}
         </Button>
         <Grid container justify="flex-end">
           <Grid item>
-            <Link href="/login" variant="body2">
+            <Link to="/login" variant="body2">
               Already have an account? Sign in
             </Link>
           </Grid>
