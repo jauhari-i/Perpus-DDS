@@ -121,7 +121,7 @@ class component extends React.Component {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
-              autoComplete="fname"
+              autoComplete="name"
               name="name"
               variant="outlined"
               required
@@ -132,15 +132,18 @@ class component extends React.Component {
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              variant="outlined"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-            />
+            <FormControl className={classes.fcWidth} variant="outlined">
+              <InputLabel htmlFor="email">Email</InputLabel>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+              />
+            </FormControl>
           </Grid>
           <Grid item xs={12}>
             <FormControl className={classes.fcWidth} variant="outlined">
