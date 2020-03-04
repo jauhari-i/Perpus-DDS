@@ -37,6 +37,7 @@ export const _AddPeminjam = data => {
     nama_petugas: data.nama_petugas,
     tgl_pinjam: data.tgl_pinjam
   });
+  console.log(peminjam);
   return {
     data: peminjam
   };

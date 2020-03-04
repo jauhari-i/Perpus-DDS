@@ -27,8 +27,8 @@ export default class component extends Component {
       nama_petugas: "Lord Aufa",
       tgl_pinjam: "17/01/2020"
     };
-    let post = _AddAnggota(data);
-    this.setState({ anggota: post.data });
+    let post = _AddPeminjam(data);
+    this.setState({ peminjam: post.data });
   }
 
   onClickFunctionDelete(id) {
