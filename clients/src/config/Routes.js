@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { pages } from "../pages";
 import Drawer from "../components/element/Drawer";
 
@@ -10,6 +10,17 @@ export class Routes extends Component {
     this.state = {
       isLoggedIn: false
     };
+  }
+
+  componentDidMount() {
+    const login = localStorage.getItem("Login");
+    if (login) {
+      if (login === "true") {
+        this.setState({
+          isLoggedIn: true
+        });
+      }
+    }
   }
 
   _RenderApp() {
@@ -25,6 +36,7 @@ export class Routes extends Component {
           <Route exact path="/petugas/:id" component={pages.Petugas} />
           <Route exact path="/anggota/:id" component={pages.Anggota} />
           <Route component={pages.Error404} />
+          <Redirect from="/login" to="/" />
         </Switch>
       </Drawer>
     );
@@ -34,7 +46,9 @@ export class Routes extends Component {
     return (
       <Switch>
         <Route exact path="/login" component={pages.Login} />
-        <Route component={pages.Error404} />
+        <Route>
+          <Redirect to="/login" />
+        </Route>
       </Switch>
     );
   }
