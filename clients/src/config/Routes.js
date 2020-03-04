@@ -34,7 +34,7 @@ export class Routes extends Component {
     return (
       <Switch>
         <Route exact path="/login" component={pages.Login} />
-        <Route exact path="/register" component={pages.Register} />
+        <Route component={pages.Error404} />
       </Switch>
     );
   }

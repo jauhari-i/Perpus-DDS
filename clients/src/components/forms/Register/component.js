@@ -79,6 +79,23 @@ class component extends React.Component {
   }
 
   handleChangePassword(e) {
+    e.target.value.length < 8
+      ? this.setState({
+          errorPass: true,
+          errorPassMsg: "Password must more than 8 character"
+        })
+      : this.setState({
+          errorPass: false,
+          errorPassMsg: ""
+        });
+    e.target.value === ""
+      ? this.setState({
+          errorPass: false,
+          errorPassMsg: ""
+        })
+      : this.setState({
+          password: e.target.value
+        });
     this.setState({
       password: e.target.value
     });
@@ -114,40 +131,92 @@ class component extends React.Component {
     });
   }
 
+  handleChangeEmail(e) {
+    function validateEmail(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    }
+    let email = e.target.value;
+    validateEmail(email)
+      ? this.setState({
+          email: email,
+          errorEmail: false,
+          errorEmailMsg: ""
+        })
+      : this.setState({
+          errorEmail: true,
+          errorEmailMsg: "Email is not valid"
+        });
+    email === ""
+      ? this.setState({
+          errorEmail: false,
+          errorEmailMsg: ""
+        })
+      : this.setState({
+          email: email
+        });
+    this.setState({
+      email: email
+    });
+  }
+
   render() {
     const { classes } = this.props;
     return (
       <form className={classes.form}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <TextField
-              autoComplete="name"
-              name="name"
-              variant="outlined"
-              required
-              fullWidth
-              id="name"
-              label="Your Name"
-              autoFocus
-            />
-          </Grid>
-          <Grid item xs={12}>
             <FormControl className={classes.fcWidth} variant="outlined">
-              <InputLabel htmlFor="email">Email</InputLabel>
-              <TextField
+              <InputLabel htmlFor="email">Name</InputLabel>
+              <OutlinedInput
+                autoComplete="name"
+                name="name"
                 variant="outlined"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="name"
+                label="Name"
+                autoFocus
               />
             </FormControl>
           </Grid>
           <Grid item xs={12}>
             <FormControl className={classes.fcWidth} variant="outlined">
-              <InputLabel htmlFor="password">Password</InputLabel>
+              <InputLabel
+                htmlFor="email"
+                error={this.state.errorEmail ? true : false}
+              >
+                Email Address
+              </InputLabel>
+              <OutlinedInput
+                required
+                fullWidth
+                error={this.state.errorEmail ? true : false}
+                type="email"
+                id="email"
+                onChange={e => this.handleChangeEmail(e)}
+                value={this.state.email}
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+              />
+              {this.state.errorEmailMsg !== "" ? (
+                <FormHelperText error>
+                  {this.state.errorEmailMsg}
+                </FormHelperText>
+              ) : (
+                ""
+              )}
+            </FormControl>
+          </Grid>
+          <Grid item xs={12}>
+            <FormControl className={classes.fcWidth} variant="outlined">
+              <InputLabel
+                htmlFor="password"
+                error={this.state.errorPass ? true : false}
+              >
+                Password
+              </InputLabel>
               <OutlinedInput
                 id="password"
                 type={this.state.showPassword ? "text" : "password"}
@@ -155,6 +224,7 @@ class component extends React.Component {
                 value={this.state.password}
                 label="Password"
                 name="password"
+                error={this.state.errorPass ? true : false}
                 required
                 endAdornment={
                   <InputAdornment position="end">
@@ -174,6 +244,11 @@ class component extends React.Component {
                 }
                 labelWidth={70}
               />
+              {this.state.errorPassMsg !== "" ? (
+                <FormHelperText error>{this.state.errorPassMsg}</FormHelperText>
+              ) : (
+                ""
+              )}
             </FormControl>
           </Grid>
           <Grid item xs={12}>
