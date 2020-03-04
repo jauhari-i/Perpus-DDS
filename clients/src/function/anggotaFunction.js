@@ -1,5 +1,5 @@
 // Dummy data (gunakan untuk percobaan function)
-let anggota = [
+export let anggota = [
   {
     kode_anggota: "AG0123",
     nama_anggota: "Budi Permana",

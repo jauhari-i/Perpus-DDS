@@ -1,5 +1,5 @@
 // Dummy data (gunakan untuk percobaan function)
-let peminjam = [
+export let peminjam = [
   {
     no_pinjam: "1",
     nama_anggota: "andi",
