@@ -1,26 +1,27 @@
 import React, { useState, useContext } from "react"
 import MaterialTable from "material-table"
+import PeopleAlt from "@material-ui/icons/PeopleAlt"
 
 const table = props => {
   const _AddHandler = (newData, resolve) => {
+    props.add(newData)
     setTimeout(() => {
-      props.add(newData)
       resolve()
-    }, 600)
+    }, 2000)
   }
   const _EditHandler = (newData, oldData, resolve) => {
+    if (oldData) {
+      props.edit(newData, oldData)
+    }
     setTimeout(() => {
-      if (oldData) {
-        props.edit(newData, oldData)
-      }
       resolve()
-    }, 600)
+    }, 1500)
   }
   const _DeleteHandler = (oldData, resolve) => {
+    props.delete(oldData)
     setTimeout(() => {
-      props.delete(oldData)
       resolve()
-    }, 600)
+    }, 1500)
   }
   return (
     <MaterialTable
@@ -42,6 +43,10 @@ const table = props => {
           })
       }}
       options={{
+        pageSize: 10,
+        pageSizeOptions: [5, 10, 20, 30, 50, 75, 100],
+        toolbar: true,
+        paging: true,
         actionsColumnIndex: -1
       }}
     />
