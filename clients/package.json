@@ -21,6 +21,7 @@
     "core-js": "^3.6.4",
     "css-loader": "^3.4.2",
     "express": "^4.17.1",
+    "firebase": "^7.9.3",
     "jquery": "^3.4.1",
     "material-table": "^1.57.2",
     "popper.js": "^1.16.1",

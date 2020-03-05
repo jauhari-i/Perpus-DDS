@@ -1,7 +1,8 @@
 import React, { useReducer } from "react"
+import axios from "../../config/axios-config"
+import firebase from "../../config/Firebase"
 import anggotaContext from "../context/anggotaContext"
 import anggotaReducer from "../reducer/anggotaReducer"
-import axios from "axios"
 import {
   DELETE_ANGGOTA,
   GET_ANGGOTA,
@@ -10,6 +11,7 @@ import {
 } from "../types"
 
 const AnggotaState = props => {
+  const ref = firebase.firestore().collection("anggota")
   let anggota = [
     {
       kode_anggota: "AG0123",
@@ -43,37 +45,41 @@ const AnggotaState = props => {
   const [state, dispatch] = useReducer(anggotaReducer, initialState)
 
   const deleteData = oldData => {
-    let data = state.data
-    let index = data.findIndex(row => row.kode_anggota === oldData.kode_anggota)
-    data.splice(index, 1)
-    dispatch({
-      type: DELETE_ANGGOTA,
-      data: data
-    })
+    console.log(oldData)
+    ref
+      .doc(oldData.kode_anggota)
+      .delete()
+      .then(res => console.log(res))
+      .catch(err => console.error(err))
   }
 
-  const getAnggota = async () => {
-    let res = await axios.get("https://demo8294675.mockable.io/data")
-    let data = res.data.anggota
-    dispatch({
-      type: GET_ANGGOTA,
-      data: data
+  const getAnggota = () => {
+    ref.get().then(querySnapshot => {
+      const data = querySnapshot.docs.map(doc => doc.data())
+      dispatch({
+        type: GET_ANGGOTA,
+        data: data
+      })
     })
   }
 
   const addAnggota = newData => {
-    let data = anggota
-    data.push(newData)
-    dispatch({
-      type: ADD_ANGGOTA,
-      data: data
-    })
+    let nData = newData
+    ref
+      .add({
+        kode_anggota: nData.kode_anggota,
+        nama_anggota: nData.nama_anggota,
+        alamat: nData.alamat,
+        telepon: nData.telepon
+      })
+      .then(() => getAnggota())
+      .catch(error => console.error("Error adding to database"))
   }
 
   const editAnggota = (newData, oldData) => {
-    let data = state.data
-    let index = data.findIndex(row => row.kode_anggota === oldData.kode_anggota)
-    data[index] = newData
+    let data = anggota
+    data[data.indexOf(oldData)] = newData
+    console.log(data.indexOf(newData))
     dispatch({
       type: EDIT_ANGGOTA,
       data: data
