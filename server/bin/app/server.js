@@ -8,7 +8,6 @@ const wrapper = require('../helpers/utils/wrapper');
 
 const anggotaHandler = require('../modules/anggota/handlers/api_handler');
 
-
 function AppServer() {
   this.server = restify.createServer({
     name: `${project.name}-server`,
