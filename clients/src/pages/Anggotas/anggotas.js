@@ -11,7 +11,7 @@ import { tableColumn } from "../../constants/Table"
 
 const anggotas = props => {
   const Anggota = useContext(anggotaContext)
-  const { getAnggota, data, deleteData, addAnggota } = Anggota
+  const { getAnggota, data, deleteData, addAnggota, editAnggota } = Anggota
   useEffect(() => {
     getAnggota()
   }, [])
@@ -25,6 +25,7 @@ const anggotas = props => {
           data={data}
           delete={deleteData}
           add={addAnggota}
+          edit={editAnggota}
         />
       </div>
     )

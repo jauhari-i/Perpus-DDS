@@ -12,12 +12,7 @@ const table = props => {
     setTimeout(() => {
       resolve()
       if (oldData) {
-        this.setState(prevState => {
-          const data = [...prevState.data]
-          data[data.indexOf(oldData)] = newData
-          return { ...prevState, data }
-        })
-        // this.props.edit(newData, oldData)
+        props.edit(newData, oldData)
       }
     }, 600)
   }

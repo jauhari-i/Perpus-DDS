@@ -1,7 +1,12 @@
 import React, { useReducer } from "react"
 import anggotaContext from "../context/anggotaContext"
 import anggotaReducer from "../reducer/anggotaReducer"
-import { DELETE_DATA, GET_ANGGOTA, ADD_ANGGOTA } from "../types"
+import {
+  DELETE_ANGGOTA,
+  GET_ANGGOTA,
+  ADD_ANGGOTA,
+  EDIT_ANGGOTA
+} from "../types"
 
 const AnggotaState = props => {
   let anggota = [
@@ -39,7 +44,7 @@ const AnggotaState = props => {
   const deleteData = oldData => {
     let data = anggota.filter(row => row.kode_anggota !== oldData.kode_anggota)
     dispatch({
-      type: DELETE_DATA,
+      type: DELETE_ANGGOTA,
       data: data
     })
   }
@@ -61,13 +66,24 @@ const AnggotaState = props => {
     })
   }
 
+  const editAnggota = (newData, oldData) => {
+    let data = anggota
+    data[data.indexOf(oldData)] = newData
+    console.log(data.indexOf(newData))
+    dispatch({
+      type: EDIT_ANGGOTA,
+      data: data
+    })
+  }
+
   return (
     <anggotaContext.Provider
       value={{
         data: state.data,
         deleteData,
         getAnggota,
-        addAnggota
+        addAnggota,
+        editAnggota
       }}
     >
       {props.children}
