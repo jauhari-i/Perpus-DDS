@@ -6,7 +6,7 @@ import {
   _DeleteAnggota
 } from "../../function/anggotaFunction"
 import Table from "../../components/element/Table"
-import anggotaContext from "../../reducer/anggotaContext"
+import anggotaContext from "../../reducer/context/anggotaContext"
 import { tableColumn } from "../../constants/Table"
 
 const anggotas = props => {

@@ -1,5 +1,5 @@
 import React from "react"
-import { DELETE_DATA, GET_ANGGOTA } from "./types"
+import { DELETE_DATA, GET_ANGGOTA } from "../types"
 
 export default (state, action) => {
   switch (action.type) {

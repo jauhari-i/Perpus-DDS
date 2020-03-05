@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react"
 import MaterialTable from "material-table"
-import anggotaContext from "../../../reducer/anggotaContext"
+import anggotaContext from "../../../reducer/context/anggotaContext"
 
 const table = props => {
   const _AddHandler = (newData, resolve) => {

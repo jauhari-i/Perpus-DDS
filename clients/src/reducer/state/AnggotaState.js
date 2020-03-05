@@ -1,7 +1,7 @@
 import React, { useReducer } from "react"
-import anggotaContext from "./anggotaContext"
-import anggotaReducer from "./anggotaReducer"
-import { DELETE_DATA, GET_ANGGOTA } from "./types"
+import anggotaContext from "../context/anggotaContext"
+import anggotaReducer from "../reducer/anggotaReducer"
+import { DELETE_DATA, GET_ANGGOTA } from "../types"
 
 const AnggotaState = props => {
   let anggota = [

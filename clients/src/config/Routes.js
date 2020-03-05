@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
 import { pages } from "../pages"
 import Drawer from "../components/element/Drawer"
-import AnggotaState from "../reducer/AnggotaState"
+import AnggotaState from "../reducer/state/AnggotaState"
 
 export class Routes extends Component {
   constructor(props) {
