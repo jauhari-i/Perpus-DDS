@@ -1,7 +1,7 @@
 import React, { useReducer } from "react"
 import anggotaContext from "../context/anggotaContext"
 import anggotaReducer from "../reducer/anggotaReducer"
-import { DELETE_DATA, GET_ANGGOTA } from "../types"
+import { DELETE_DATA, GET_ANGGOTA, ADD_ANGGOTA } from "../types"
 
 const AnggotaState = props => {
   let anggota = [
@@ -52,12 +52,22 @@ const AnggotaState = props => {
     })
   }
 
+  const addAnggota = newData => {
+    let data = anggota
+    data.push(newData)
+    dispatch({
+      type: ADD_ANGGOTA,
+      data: data
+    })
+  }
+
   return (
     <anggotaContext.Provider
       value={{
         data: state.data,
         deleteData,
-        getAnggota
+        getAnggota,
+        addAnggota
       }}
     >
       {props.children}

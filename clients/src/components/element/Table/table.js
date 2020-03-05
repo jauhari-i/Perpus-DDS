@@ -1,17 +1,11 @@
 import React, { useState, useContext } from "react"
 import MaterialTable from "material-table"
-import anggotaContext from "../../../reducer/context/anggotaContext"
 
 const table = props => {
   const _AddHandler = (newData, resolve) => {
     setTimeout(() => {
       resolve()
-      this.setState(prevState => {
-        const data = [...prevState.data]
-        data.push(newData)
-        return { ...prevState, data }
-      })
-      //  this.props.add(newData)
+      props.add(newData)
     }, 600)
   }
   const _EditHandler = (newData, oldData, resolve) => {
