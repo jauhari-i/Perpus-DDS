@@ -1,8 +1,8 @@
 
 const User = require('./domain');
-const Mongo = require('../../../../helpers/databases/mongodb/db');
+const Mysql = require('../../../../helpers/databases/mysql/db');
 const config = require('../../../../infra/configs/global_config');
-const db = new Mongo(config.get('/mongoDbUrl'));
+const db = new Mysql(config.get('/mySqlDBUrl'));
 
 const postDataLogin = async (payload) => {
   const user = new User(db);

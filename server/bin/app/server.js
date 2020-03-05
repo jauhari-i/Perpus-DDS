@@ -45,8 +45,8 @@ function AppServer() {
 
   // // authenticated client can access the end point, place code bellow
 
-  this.server.get('/api/anggota', basicAuth.isAuthenticated, anggotaHandler.getHalo);
-  this.server.get('/api/anggota/:userId', basicAuth.isAuthenticated, anggotaHandler.getHalo);
+  this.server.get('/api/anggota', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
+  this.server.get('/api/anggota/:userId', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
 
 }
 
