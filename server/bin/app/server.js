@@ -7,6 +7,7 @@ const jwtAuth = require('../auth/jwt_auth_helper');
 const wrapper = require('../helpers/utils/wrapper');
 
 const anggotaHandler = require('../modules/anggota/handlers/api_handler');
+const peminjamanHandler = require('../modules/peminjaman/handlers/api_handler')
 
 function AppServer() {
   this.server = restify.createServer({
@@ -42,9 +43,13 @@ function AppServer() {
 
   // // authenticated client can access the end point, place code bellow
 
-  this.server.get('/api/anggota', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
-  this.server.get('/api/anggota/:userId', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
+  // ANGGOTA
+  this.server.get('/anggota', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
+  this.server.get('/anggota/:userId', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
 
+  // PEMINJAMAN
+  this.server.get('/peminjaman', basicAuth.isAuthenticated, peminjamanHandler.getPeminjaman);
+  // this.server.get('/peminjaman', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
 }
 
 module.exports = AppServer;
