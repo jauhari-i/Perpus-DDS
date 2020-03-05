@@ -16,7 +16,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-// import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import GroupIcon from "@material-ui/icons/Group";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import drawerListData from "../../../constants/drawerListData";
@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex"
   },
   appBar: {
+    zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
@@ -37,49 +38,54 @@ const useStyles = makeStyles(theme => ({
     color: "#000"
   },
   appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
+      easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen
     })
   },
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: 36
   },
   hide: {
     display: "none"
   },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
+    whiteSpace: "nowrap"
   },
-  drawerPaper: {
+  drawerOpen: {
     width: drawerWidth,
-    backgroundColor: "#444444"
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen
+    }),
+    backgroundColor: "#444"
   },
-  drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar,
-    justifyContent: "space-between"
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
+  drawerClose: {
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    marginLeft: -drawerWidth
+    overflowX: "hidden",
+    width: theme.spacing(7) + 1,
+    [theme.breakpoints.up("sm")]: {
+      width: theme.spacing(9) + 1
+    },
+    backgroundColor: "#444"
   },
-  contentShift: {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    }),
-    marginLeft: 0
+  toolbar: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    padding: theme.spacing(0, 1),
+    ...theme.mixins.toolbar
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3)
   },
   listItem: {
     color: "#fff"
@@ -114,7 +120,9 @@ export default function component(props) {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
+            className={clsx(classes.menuButton, {
+              [classes.hide]: open
+            })}
           >
             <MenuIcon />
           </IconButton>
@@ -128,26 +136,27 @@ export default function component(props) {
         </Toolbar>
       </AppBar>
       <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
+        variant="permanent"
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open
+        })}
         classes={{
-          paper: classes.drawerPaper
+          paper: clsx({
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open
+          })
         }}
       >
-        <div
-          className={classes.drawerHeader}
-          style={{ backgroundColor: "#333333" }}
-        >
+        <div className={classes.toolbar} style={{ backgroundColor: "#333333" }}>
           <Typography variant="h6" noWrap className={classes.listItem}>
             Perpustakaan DDS
           </Typography>
           <IconButton onClick={handleDrawerClose} className={classes.listItem}>
-            {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
+            {theme.direction === "rtl" ? (
               <ChevronRightIcon />
+            ) : (
+              <ChevronLeftIcon />
             )}
           </IconButton>
         </div>
@@ -167,12 +176,8 @@ export default function component(props) {
           ))}
         </List>
       </Drawer>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open
-        })}
-      >
-        <div className={classes.drawerHeader} />
+      <main className={classes.content}>
+        <div className={classes.toolbar} />
         {props.children}
       </main>
     </div>
