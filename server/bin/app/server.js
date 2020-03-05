@@ -8,8 +8,6 @@ const wrapper = require('../helpers/utils/wrapper');
 
 const anggotaHandler = require('../modules/anggota/handlers/api_handler');
 
-const dbSql = require('../helpers/databases/mysql/connection');
-
 
 function AppServer() {
   this.server = restify.createServer({
