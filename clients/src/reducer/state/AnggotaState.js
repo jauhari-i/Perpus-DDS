@@ -3,41 +3,11 @@ import axios from "../../config/axios-config"
 import firebase from "../../config/Firebase"
 import anggotaContext from "../context/anggotaContext"
 import anggotaReducer from "../reducer/anggotaReducer"
-import {
-  DELETE_ANGGOTA,
-  GET_ANGGOTA,
-  ADD_ANGGOTA,
-  EDIT_ANGGOTA
-} from "../types"
+import { GET_ANGGOTA } from "../types"
 
 const AnggotaState = props => {
   const ref = firebase.firestore().collection("anggota")
-  let anggota = [
-    {
-      kode_anggota: "AG0123",
-      nama_anggota: "Budi Permana",
-      alamat: "Jl. Bunga Mawar",
-      telepon: "081237492812"
-    },
-    {
-      kode_anggota: "AG0456",
-      nama_anggota: "Alex Permana",
-      alamat: "Jl. Bunga Melati",
-      telepon: "081237492812"
-    },
-    {
-      kode_anggota: "AG0789",
-      nama_anggota: "Budi Santoso",
-      alamat: "Jl. Bunga Anggrek",
-      telepon: "081237492812"
-    },
-    {
-      kode_anggota: "AG0202",
-      nama_anggota: "Ales Santoso",
-      alamat: "Jl. Bunga Tulip",
-      telepon: "081237492812"
-    }
-  ]
+
   const initialState = {
     data: []
   }
@@ -47,15 +17,21 @@ const AnggotaState = props => {
   const deleteData = oldData => {
     console.log(oldData)
     ref
-      .doc(oldData.kode_anggota)
+      .doc(oldData.id)
       .delete()
-      .then(res => console.log(res))
+      .then(() => getAnggota())
       .catch(err => console.error(err))
   }
 
   const getAnggota = () => {
     ref.get().then(querySnapshot => {
-      const data = querySnapshot.docs.map(doc => doc.data())
+      const data = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        kode_anggota: doc.data().kode_anggota,
+        nama_anggota: doc.data().nama_anggota,
+        alamat: doc.data().alamat,
+        telepon: doc.data().telepon
+      }))
       dispatch({
         type: GET_ANGGOTA,
         data: data
@@ -77,13 +53,16 @@ const AnggotaState = props => {
   }
 
   const editAnggota = (newData, oldData) => {
-    let data = anggota
-    data[data.indexOf(oldData)] = newData
-    console.log(data.indexOf(newData))
-    dispatch({
-      type: EDIT_ANGGOTA,
-      data: data
-    })
+    ref
+      .doc(oldData.id)
+      .set({
+        kode_anggota: newData.kode_anggota,
+        nama_anggota: newData.nama_anggota,
+        alamat: newData.alamat,
+        telepon: newData.telepon
+      })
+      .then(() => getAnggota())
+      .catch(err => console.error("Error"))
   }
 
   return (
