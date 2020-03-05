@@ -40,31 +40,17 @@ export const _GetAnggotaById = id => {
   };
 };
 
-export const _AddAnggota = data => {
-  anggota.push({
-    kode_anggota: data.kode_anggota,
-    nama_anggota: data.nama_anggota,
-    alamat: data.alamat,
-    telepon: data.telepon
-  });
-  return {
-    data: anggota
-  };
+export const _AddAnggota = newData => {
+  anggota.push(newData);
+  return { data: anggota };
 };
 
-export const _EditAnggota = ({ id, data }) => {
-  anggota.splice(id, 1, {
-    kode_anggota: data.kode_anggota,
-    nama_anggota: data.nama_anggota,
-    alamat: data.alamat,
-    telepon: data.telepon
-  });
-  return {
-    data: anggota
-  };
+export const _EditAnggota = (newData, oldData) => {
+  anggota[anggota.indexOf(oldData)] = newData;
+  return { data: anggota };
 };
 
-export const _DeleteAnggota = oldData => {
-  anggota.splice(anggota.indexOf(oldData), 1);
+export const _DeleteAnggota = newData => {
+  anggota.splice(anggota.indexOf(newData), 1);
   return { data: anggota };
 };

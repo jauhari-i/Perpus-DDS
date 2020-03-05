@@ -22,6 +22,7 @@ export default class component extends Component {
         data.push(newData);
         return { ...prevState, data };
       });
+      this.props.add(newData);
     }, 600);
   };
 
@@ -29,12 +30,12 @@ export default class component extends Component {
     setTimeout(() => {
       resolve();
       if (oldData) {
-        console.log(newData);
         this.setState(prevState => {
           const data = [...prevState.data];
           data[data.indexOf(oldData)] = newData;
           return { ...prevState, data };
         });
+        this.props.edit(newData, oldData);
       }
     }, 600);
   };
