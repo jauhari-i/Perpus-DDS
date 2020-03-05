@@ -1,6 +1,7 @@
 import React, { useReducer } from "react"
 import anggotaContext from "../context/anggotaContext"
 import anggotaReducer from "../reducer/anggotaReducer"
+import axios from "axios"
 import {
   DELETE_ANGGOTA,
   GET_ANGGOTA,
@@ -42,7 +43,7 @@ const AnggotaState = props => {
   const [state, dispatch] = useReducer(anggotaReducer, initialState)
 
   const deleteData = oldData => {
-    let data = anggota
+    let data = state.data
     let index = data.findIndex(row => row.kode_anggota === oldData.kode_anggota)
     data.splice(index, 1)
     dispatch({
@@ -51,8 +52,9 @@ const AnggotaState = props => {
     })
   }
 
-  const getAnggota = () => {
-    let data = anggota
+  const getAnggota = async () => {
+    let res = await axios.get("https://demo8294675.mockable.io/data")
+    let data = res.data.anggota
     dispatch({
       type: GET_ANGGOTA,
       data: data
@@ -69,7 +71,7 @@ const AnggotaState = props => {
   }
 
   const editAnggota = (newData, oldData) => {
-    let data = anggota
+    let data = state.data
     let index = data.findIndex(row => row.kode_anggota === oldData.kode_anggota)
     data[index] = newData
     dispatch({
