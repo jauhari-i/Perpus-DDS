@@ -8,9 +8,6 @@ const wrapper = require('../helpers/utils/wrapper');
 
 const anggotaHandler = require('../modules/anggota/handlers/api_handler');
 
-const dbSql = require('../helpers/databases/mysql/connection');
-
-
 function AppServer() {
   this.server = restify.createServer({
     name: `${project.name}-server`,
@@ -45,8 +42,8 @@ function AppServer() {
 
   // // authenticated client can access the end point, place code bellow
 
-  this.server.get('/api/anggota', basicAuth.isAuthenticated, anggotaHandler.getHalo);
-  this.server.get('/api/anggota/:userId', basicAuth.isAuthenticated, anggotaHandler.getHalo);
+  this.server.get('/api/anggota', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
+  this.server.get('/api/anggota/:userId', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
 
 }
 

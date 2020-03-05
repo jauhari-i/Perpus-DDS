@@ -9,8 +9,8 @@ class Anggota {
     this.query = new Query(db);
   }
 
-  async lihatAnggota(userId) {
-    const dbOutput = await this.query.findMany({});
+  async lihatAnggota() {
+    const dbOutput = await this.query.getAnggota();
     
     if (dbOutput.err) {
       return wrapper.error(new NotFoundError('Data tidak ada wow'));

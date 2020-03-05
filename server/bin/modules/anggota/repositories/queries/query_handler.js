@@ -1,13 +1,13 @@
 
-const Halo = require('./domain');
+const Anggota = require('./domain');
 const Sql = require('../../../../helpers/databases/mysql/db');
 const config = require('../../../../infra/configs/global_config');
 const db = new Sql(config.get('/sqlDbUrl'));
-const gets = new Halo(db);
+const anggota = new Anggota(db);
 
 const getUser = async (userId) => {
   const getData = async () => {
-    const result = await gets.lihatAnggota(userId);
+    const result = await anggota.getAnggota(userId);
     return result;
   };
   const result = await getData();
