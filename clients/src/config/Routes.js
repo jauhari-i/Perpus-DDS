@@ -9,7 +9,7 @@ export class Routes extends Component {
     super(props)
 
     this.state = {
-      isLoggedIn: true
+      isLoggedIn: false
     }
   }
 

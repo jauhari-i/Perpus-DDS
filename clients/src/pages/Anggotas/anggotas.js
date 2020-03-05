@@ -15,7 +15,6 @@ const anggotas = props => {
   useEffect(() => {
     getAnggota()
   }, [])
-
   if (data) {
     return (
       <div>

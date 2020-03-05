@@ -4,22 +4,22 @@ import MaterialTable from "material-table"
 const table = props => {
   const _AddHandler = (newData, resolve) => {
     setTimeout(() => {
-      resolve()
       props.add(newData)
+      resolve()
     }, 600)
   }
   const _EditHandler = (newData, oldData, resolve) => {
     setTimeout(() => {
-      resolve()
       if (oldData) {
         props.edit(newData, oldData)
       }
+      resolve()
     }, 600)
   }
   const _DeleteHandler = (oldData, resolve) => {
     setTimeout(() => {
-      resolve()
       props.delete(oldData)
+      resolve()
     }, 600)
   }
   return (

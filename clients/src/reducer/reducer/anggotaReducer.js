@@ -9,6 +9,7 @@ import {
 export default (state, action) => {
   switch (action.type) {
     case DELETE_ANGGOTA:
+      console.log(action.data)
       return {
         ...state,
         data: action.data

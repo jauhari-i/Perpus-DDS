@@ -42,7 +42,9 @@ const AnggotaState = props => {
   const [state, dispatch] = useReducer(anggotaReducer, initialState)
 
   const deleteData = oldData => {
-    let data = anggota.filter(row => row.kode_anggota !== oldData.kode_anggota)
+    let data = anggota
+    let index = data.findIndex(row => row.kode_anggota === oldData.kode_anggota)
+    data.splice(index, 1)
     dispatch({
       type: DELETE_ANGGOTA,
       data: data
@@ -68,8 +70,8 @@ const AnggotaState = props => {
 
   const editAnggota = (newData, oldData) => {
     let data = anggota
-    data[data.indexOf(oldData)] = newData
-    console.log(data.indexOf(newData))
+    let index = data.findIndex(row => row.kode_anggota === oldData.kode_anggota)
+    data[index] = newData
     dispatch({
       type: EDIT_ANGGOTA,
       data: data
