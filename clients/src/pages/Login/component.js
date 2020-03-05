@@ -36,7 +36,7 @@ class component extends Component {
           <Typography component="h1" variant="h5">
             Login
           </Typography>
-          <Login />
+          <Login type="Login" history={this.props.history} />
         </div>
         <Box mt={8}>
           <Copyright>Tefa DDS</Copyright>

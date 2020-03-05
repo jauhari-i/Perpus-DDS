@@ -5,9 +5,8 @@ const project = require('../../package.json');
 const basicAuth = require('../auth/basic_auth_helper');
 const jwtAuth = require('../auth/jwt_auth_helper');
 const wrapper = require('../helpers/utils/wrapper');
-const userHandler = require('../modules/user/handlers/api_handler');
-const projectHandler = require('../modules/project/handlers/api_handler');
-const mongoConnectionPooling = require('../helpers/databases/mongodb/connection');
+
+const anggotaHandler = require('../modules/anggota/handlers/api_handler');
 
 function AppServer() {
   this.server = restify.createServer({
@@ -41,16 +40,11 @@ function AppServer() {
     wrapper.response(res, 'success', wrapper.data('Index'), 'This service is running properly');
   });
 
-  // authenticated client can access the end point, place code bellow
-  this.server.post('/api/users/v1', basicAuth.isAuthenticated, userHandler.postDataLogin);
-  this.server.get('/api/users/v1', jwtAuth.verifyToken, userHandler.getUser);
-  this.server.post('/api/users/v1/register', basicAuth.isAuthenticated, userHandler.registerUser);
+  // // authenticated client can access the end point, place code bellow
 
-  // project
-  this.server.get('/api/projects/v1', basicAuth.isAuthenticated, projectHandler.getProjectList);
+  this.server.get('/api/anggota', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
+  this.server.get('/api/anggota/:userId', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
 
-  //Initiation
-  mongoConnectionPooling.init();
 }
 
 module.exports = AppServer;

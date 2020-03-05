@@ -17,6 +17,10 @@ export default class component extends Component {
 
   componentDidMount() {
     // Untuk function _GetPeminjamAll()
+    console.log(_GetPeminjamAll());
+    this.setState({
+      peminjam: _GetPeminjamAll().data
+    });
   }
 
   onClickFunction() {
@@ -32,11 +36,23 @@ export default class component extends Component {
   }
 
   onClickFunctionDelete(id) {
-    // Untuk function _DeletePeminjam()
+    let deletes = _DeletePeminjam(id);
+    this.setState({
+      peminjam: deletes.data
+    });
   }
 
   onClickFunctionEdit(id) {
-    // Untuk function _EditPeminjam()
+    const data = {
+      no_pinjam: "4",
+      nama_anggota: "Aufakkkk",
+      nama_petugas: "Lord Aufa manuk e lemes",
+      tgl_pinjam: "17/01/2020"
+    };
+    let put = _EditPeminjam({ id, data });
+    this.setState({
+      peminjam: put.data
+    });
   }
 
   render() {

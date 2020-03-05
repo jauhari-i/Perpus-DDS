@@ -1,21 +1,8 @@
 {
-
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
   "name": "codebase-backend",
   "version": "1.0.0",
   "description": "Repo for codebase backend",
   "main": "index.js",
-  "engines": {
-    "node": "8.9.3"
-  },
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
@@ -25,6 +12,11 @@
     "slint": "sonarlint --src 'bin/**' --tests 'test/**'",
     "lint": "eslint bin test",
     "lint:fix": "npm run lint -- --fix"
+  },
+  "author": "Telkom Indonesia",
+  "license": "(ISC OR GPL-3.0)",
+  "engines": {
+    "node": "8.9.3"
   },
   "repository": {
     "type": "git",
@@ -37,8 +29,6 @@
     "nodejs",
     "telkom"
   ],
-  "author": "Telkom Indonesia",
-  "license": "(ISC OR GPL-3.0)",
   "bugs": {
     "url": "https://gitlab.playcourt.id/telkomdev/api-mockup-management/issues"
   },
