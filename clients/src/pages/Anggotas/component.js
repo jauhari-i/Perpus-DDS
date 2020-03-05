@@ -12,15 +12,8 @@ import { tableFunction } from "../../function/tableFunction";
 
 export default class component extends Component {
   onClickFunctionAdd(newData) {
-    // const data = {
-    //   kode_anggota: "AG0203",
-    //   nama_anggota: "Backend",
-    //   alamat: "Backend Mana?",
-    //   telepon: "081237492813"
-    // };
-    // let post = _AddAnggota(data);
-    // this.setState({ anggota: post.data });
     const added = _AddAnggota(newData);
+    return added.data;
   }
 
   onClickFunctionEdit(newData, oldData) {
