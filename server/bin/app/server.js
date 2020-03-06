@@ -48,6 +48,7 @@ function AppServer() {
   });
 
   // ANGGOTA
+<<<<<<< HEAD
 
   this.server.get(
     '/anggota',
@@ -78,15 +79,19 @@ function AppServer() {
     basicAuth.isAuthenticated,
     cobaHandler.insertHelloword
   );
+=======
+>>>>>>> b5361b7dea06e64db0b4d2aaa6b0a14f21725110
 
 
   // PEMINJAMAN
+<<<<<<< HEAD
   this.server.get(
     '/peminjaman',
     basicAuth.isAuthenticated,
     peminjamanHandler.getPeminjaman
   );
-  // this.server.get('/peminjaman', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
+=======
+>>>>>>> b5361b7dea06e64db0b4d2aaa6b0a14f21725110
 
   // PETUGAS
   this.server.get('/petugas', 

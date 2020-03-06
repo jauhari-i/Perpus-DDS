@@ -5,29 +5,29 @@ const db = new MySql(config.get("/mysqlConfig"));
 const halo = new Halo(db);
 
 const getHelloword = async () => {
-  const getData = async () => {
+  const Data = async () => {
     const result = await halo.viewHalo();
     return result;
   };
-  const result = await getData();
+  const result = await Data();
   return result;
 };
 
 const getHellowordId = async id_anggota => {
-  const getDataId = async () => {
+  const Data = async () => {
     const result = await halo.viewHaloId(id_anggota);
     return result;
   };
-  const result = await getDataId();
+  const result = await Data();
   return result;
 };
 
 const insertHelloword = async parameter => {
-  const insertData = async () => {
+  const Data = async () => {
     const result = await halo.insertHalo(parameter);
     return result;
   };
-  const result = await insertData();
+  const result = await Data();
   return result;
 };
 
