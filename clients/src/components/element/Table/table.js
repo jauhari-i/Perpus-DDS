@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import MaterialTable from "material-table";
 import EditIcon from "@material-ui/icons/Edit";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
@@ -32,29 +32,21 @@ const table = props => {
 
   const _AddHandler = (newData, resolve) => {
     props.add(newData);
-    setTimeout(() => {
-      resolve();
-    }, 2000);
+    resolve();
   };
-
   const _EditHandler = (newData, oldData, resolve) => {
     if (oldData) {
       props.edit(newData, oldData);
     }
-    setTimeout(() => {
-      resolve();
-    }, 1500);
+    resolve();
   };
-
   const _DeleteHandler = (oldData, resolve) => {
     props.delete(oldData);
-    setTimeout(() => {
-      resolve();
-    }, 1500);
+    resolve();
   };
-
   return (
     <MaterialTable
+      isLoading={props.loading}
       title={props.title}
       columns={props.columns}
       data={props.data}

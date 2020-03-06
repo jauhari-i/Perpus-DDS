@@ -1,47 +1,52 @@
-import React, { useReducer } from "react";
-import axios from "../../config/axios-config";
-import firebase from "../../config/Firebase";
-import anggotaContext from "../context/anggotaContext";
-import anggotaReducer from "../reducer/anggotaReducer";
-import { GET_ANGGOTA } from "../types";
+import React, { useReducer } from "react"
+import axios from "../../config/axios-config"
+import firebase from "../../config/Firebase"
+import anggotaContext from "../context/anggotaContext"
+import anggotaReducer from "../reducer/anggotaReducer"
+import { GET_ANGGOTA, SET_LOADING } from "../types"
 
 const AnggotaState = props => {
-  const ref = firebase.firestore().collection("anggota");
+  const ref = firebase.firestore().collection("anggota")
 
   const initialState = {
-    data: []
-  };
+    data: [],
+    loading: false
+  }
 
-  const [state, dispatch] = useReducer(anggotaReducer, initialState);
+  const [state, dispatch] = useReducer(anggotaReducer, initialState)
 
-  const deleteData = oldData => {
-    console.log(oldData);
-    ref
+  const setLoading = () => dispatch({ type: SET_LOADING })
+
+  const deleteData = async oldData => {
+    setLoading()
+    await ref
       .doc(oldData.id)
       .delete()
       .then(() => getAnggota())
-      .catch(err => console.error(err));
-  };
+      .catch(err => console.error(err))
+  }
 
-  const getAnggota = () => {
-    ref.get().then(querySnapshot => {
+  const getAnggota = async () => {
+    setLoading()
+    await ref.get().then(querySnapshot => {
       const data = querySnapshot.docs.map(doc => ({
         id: doc.id,
         kode_anggota: doc.data().kode_anggota,
         nama_anggota: doc.data().nama_anggota,
         alamat: doc.data().alamat,
         telepon: doc.data().telepon
-      }));
+      }))
       dispatch({
         type: GET_ANGGOTA,
         data: data
-      });
-    });
-  };
+      })
+    })
+  }
 
-  const addAnggota = newData => {
-    let nData = newData;
-    ref
+  const addAnggota = async newData => {
+    let nData = newData
+    setLoading()
+    await ref
       .add({
         kode_anggota: `AG${state.data.length}`,
         nama_anggota: nData.nama_anggota,
@@ -49,11 +54,12 @@ const AnggotaState = props => {
         telepon: nData.telepon
       })
       .then(() => getAnggota())
-      .catch(error => console.error("Error adding to database"));
-  };
+      .catch(error => console.error("Error adding to database"))
+  }
 
-  const editAnggota = (newData, oldData) => {
-    ref
+  const editAnggota = async (newData, oldData) => {
+    setLoading()
+    await ref
       .doc(oldData.id)
       .set({
         kode_anggota: newData.kode_anggota,
@@ -62,13 +68,14 @@ const AnggotaState = props => {
         telepon: newData.telepon
       })
       .then(() => getAnggota())
-      .catch(err => console.error("Error"));
-  };
+      .catch(err => console.error("Error"))
+  }
 
   return (
     <anggotaContext.Provider
       value={{
         data: state.data,
+        loading: state.loading,
         deleteData,
         getAnggota,
         addAnggota,
@@ -77,7 +84,7 @@ const AnggotaState = props => {
     >
       {props.children}
     </anggotaContext.Provider>
-  );
-};
+  )
+}
 
-export default AnggotaState;
+export default AnggotaState
