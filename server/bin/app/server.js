@@ -41,11 +41,9 @@ function AppServer() {
     wrapper.response(res, 'success', wrapper.data('Index'), 'This service is running properly');
   });
 
-  // // authenticated client can access the end point, place code bellow
-
   // ANGGOTA
-  this.server.get('/anggota', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
-  this.server.get('/anggota/:userId', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
+  this.server.get('/api', anggotaHandler.getAnggota);
+  this.server.get('/api/:userId', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
 
   // PEMINJAMAN
   this.server.get('/peminjaman', basicAuth.isAuthenticated, peminjamanHandler.getPeminjaman);

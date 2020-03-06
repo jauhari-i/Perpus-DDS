@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const config = require('../infra/configs/global_config');
-const queryUser = require('../modules/user/repositories/queries/query_handler');
+const queryUser = require('../modules/anggota/repositories/queries/query_handler');
 const wrapper = require('../helpers/utils/wrapper');
 const { ERROR } = require('../helpers/http-status/status_code');
 const { UnauthorizedError, ForbiddenError } = require('../helpers/error');

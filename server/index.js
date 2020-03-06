@@ -8,5 +8,5 @@ const dbSql = require('./bin/helpers/databases/mysql/connection')
 appServer.server.listen(port, () => {
   const ctx = 'app-listen';
   logger.log(ctx, `${appServer.server.name} started, listening at ${appServer.server.url}`, 'initate application');
-  logger.log(dbSql, `koneksi`)
+  logger.log(dbSql,`koneksi di databes`)
 });

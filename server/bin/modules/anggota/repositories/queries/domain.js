@@ -1,5 +1,5 @@
-
 const Query = require('./query');
+const queryModel = require('./query_model')
 const wrapper = require('../../../../helpers/utils/wrapper');
 const { NotFoundError } = require('../../../../helpers/error');
 
@@ -9,14 +9,21 @@ class Anggota {
     this.query = new Query(db);
   }
 
-  async lihatAnggota() {
-    const dbOutput = await this.query.getAnggota();
-    
-    if (dbOutput.err) {
+  async viewAnggota() {
+    const anggota = await this.query.getData();
+    if (anggota.err) {
       return wrapper.error(new NotFoundError('Data tidak ada wow'));
     }
 
-    return wrapper.data(dbOutput);
+    const output = [];
+    anggota.data.map(i => {
+      const anggotaNya = queryModel.project();
+      anggotaNya.kd_anggota = i.kd_anggota;
+      anggotaNya.nm_anggota = i.nm_anggota;
+      output.push(anggotaNya);
+    });
+
+    return console.log(output)
   }
 
 }
