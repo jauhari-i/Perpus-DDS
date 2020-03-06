@@ -1,7 +1,9 @@
 const anggotaColumn = [
   {
     title: "Kode Anggota",
-    field: "kode_anggota"
+    field: "kode_anggota",
+    editable: "never",
+    defaultSort: "asc"
   },
   {
     title: "Nama Anggota",
