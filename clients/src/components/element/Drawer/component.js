@@ -16,10 +16,10 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import GroupIcon from "@material-ui/icons/Group";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import drawerListData from "../../../constants/drawerListData";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 const drawerWidth = 240;
@@ -164,8 +164,6 @@ export default function component(props) {
         <Divider />
         <List>
           {drawerListData.map((item, index) => {
-            console.log(index);
-            console.log(index < 3);
             if (index < 3) {
               return (
                 <ListItem button key={index} component={Link} to={item.url}>
@@ -175,6 +173,18 @@ export default function component(props) {
                     ) : (
                       <GroupIcon className={classes.listItem} />
                     )}
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.name}
+                    className={classes.listItem}
+                  />
+                </ListItem>
+              );
+            } else if (index === 3) {
+              return (
+                <ListItem button key={index} component={Link} to={item.url}>
+                  <ListItemIcon>
+                    <MenuBookIcon className={classes.listItem} />
                   </ListItemIcon>
                   <ListItemText
                     primary={item.name}

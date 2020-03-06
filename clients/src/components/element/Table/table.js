@@ -5,6 +5,8 @@ import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import DeleteIcon from "@material-ui/icons/Delete";
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
 import { green } from "@material-ui/core/colors";
 
 const table = props => {
@@ -55,7 +57,9 @@ const table = props => {
       icons={{
         Add: props => <AddCircleIcon color="primary" />,
         Edit: props => <EditIcon style={{ color: green[500] }} />,
-        Delete: props => <DeleteIcon color="secondary" />
+        Delete: props => <DeleteIcon color="secondary" />,
+        Check: props => <CheckIcon style={{ color: green[500] }} />,
+        Clear: props => <ClearIcon color="secondary" />
       }}
     />
   );

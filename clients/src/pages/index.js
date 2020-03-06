@@ -9,6 +9,7 @@ import Error404 from "./Error404";
 import DummyPage from "./DummyPage";
 import Login from "./Login";
 import Register from "./Register";
+import Bukus from "./Bukus";
 
 export const pages = {
   Home,
@@ -21,5 +22,6 @@ export const pages = {
   Petugases,
   DummyPage,
   Login,
-  Register
+  Register,
+  Bukus
 };

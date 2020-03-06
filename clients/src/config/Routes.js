@@ -1,25 +1,26 @@
-import React, { Component } from "react"
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
-import { pages } from "../pages"
-import Drawer from "../components/element/Drawer"
-import AnggotaState from "../reducer/state/AnggotaState"
+import React, { Component } from "react";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { pages } from "../pages";
+import Drawer from "../components/element/Drawer";
+import AnggotaState from "../reducer/state/AnggotaState";
+import BukuState from "../reducer/state/BukuState";
 
 export class Routes extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       isLoggedIn: true
-    }
+    };
   }
 
   componentDidMount() {
-    const login = localStorage.getItem("Login")
+    const login = localStorage.getItem("Login");
     if (login) {
       if (login === "true") {
         this.setState({
           isLoggedIn: true
-        })
+        });
       }
     }
   }
@@ -27,22 +28,25 @@ export class Routes extends Component {
   _RenderApp() {
     return (
       <Drawer>
-        <Switch>
-          <Redirect from="/login" to="/" />
-          <Route exact path="/" component={pages.Home} />
-          <Route exact path="/test" component={pages.DummyPage} />
-          <Route exact path="/peminjam" component={pages.Peminjams} />
-          <Route exact path="/petugas" component={pages.Petugases} />
-          <AnggotaState>
-            <Route exact path="/anggota" component={pages.Anggotas} />
-          </AnggotaState>
-          <Route exact path="/peminjam/:id" component={pages.Peminjam} />
-          <Route exact path="/petugas/:id" component={pages.Petugas} />
-          <Route exact path="/anggota/:id" component={pages.Anggota} />
-          <Route component={pages.Error404} />
-        </Switch>
+        <AnggotaState>
+          <BukuState>
+            <Switch>
+              <Redirect from="/login" to="/" />
+              <Route exact path="/" component={pages.Home} />
+              <Route exact path="/test" component={pages.DummyPage} />
+              <Route exact path="/peminjam" component={pages.Peminjams} />
+              <Route exact path="/petugas" component={pages.Petugases} />
+              <Route exact path="/buku" component={pages.Bukus} />
+              <Route exact path="/anggota" component={pages.Anggotas} />
+              <Route exact path="/peminjam/:id" component={pages.Peminjam} />
+              <Route exact path="/petugas/:id" component={pages.Petugas} />
+              <Route exact path="/anggota/:id" component={pages.Anggota} />
+              <Route component={pages.Error404} />
+            </Switch>
+          </BukuState>
+        </AnggotaState>
       </Drawer>
-    )
+    );
   }
 
   _RenderLogin() {
@@ -53,7 +57,7 @@ export class Routes extends Component {
           <Redirect to="/login" />
         </Route>
       </Switch>
-    )
+    );
   }
 
   render() {
@@ -61,8 +65,8 @@ export class Routes extends Component {
       <BrowserRouter>
         {this.state.isLoggedIn ? this._RenderApp() : this._RenderLogin()}
       </BrowserRouter>
-    )
+    );
   }
 }
 
-export default Routes
+export default Routes;
