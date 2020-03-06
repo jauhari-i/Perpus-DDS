@@ -43,7 +43,7 @@ const AnggotaState = props => {
     let nData = newData
     ref
       .add({
-        kode_anggota: nData.kode_anggota,
+        kode_anggota: `AG${state.data.length}`,
         nama_anggota: nData.nama_anggota,
         alamat: nData.alamat,
         telepon: nData.telepon
