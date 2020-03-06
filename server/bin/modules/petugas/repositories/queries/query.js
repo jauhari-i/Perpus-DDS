@@ -9,6 +9,11 @@ class Query {
     return recordset
   }
 
+  async getPetugasId(userId){
+    const recordset = await this.db.query(`SELECT * FROM petugas WHERE kd_petugas ='`+userId+`'`)
+    return recordset
+  }
+
   async postPetugas(data){
     const recordset = await this.db.query(
     `INSERT INTO petugas (nm_petugas,jabatan,tlpn_petugas,email_petugas,ps_petugas) 

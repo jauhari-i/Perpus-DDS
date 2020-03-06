@@ -90,6 +90,7 @@ function AppServer() {
 
   // PETUGAS
   this.server.get('/petugas', basicAuth.isAuthenticated, petugasHandler.getPetugas);
+  this.server.get('/petugas/:userId', basicAuth.isAuthenticated, petugasHandler.getPetugasId);
   this.server.post('/petugas/add', basicAuth.isAuthenticated, petugasHandler.addPetugas);
   this.server.post('/petugas/delete/:userId', basicAuth.isAuthenticated, petugasHandler.deletePetugas);
   this.server.post('/petugas/update/:userId', basicAuth.isAuthenticated, petugasHandler.updatePetugas);

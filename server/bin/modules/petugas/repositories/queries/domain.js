@@ -17,6 +17,14 @@ class Petugas {
     return wrapper.data(user)
   }
 
+  async getPetugasId(userId) {
+    const user = await this.query.getPetugasId(userId);
+    if (user.err) {
+      return wrapper.error(new NotFoundError('Can not find list Petugas'));
+    }
+    return wrapper.data(user)
+  }
+
   async addPetugas(data) {
     const user = await this.query.postPetugas(data);
     if (user.err) {

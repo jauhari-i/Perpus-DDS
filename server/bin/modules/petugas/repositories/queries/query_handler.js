@@ -14,6 +14,15 @@ const getData = async () => {
   return result;
 };
 
+const getDatabyId = async (userId) => {
+  const getData = async () => {
+    const result = await petugas.getPetugasId(userId);
+    return result;
+  };
+  const result = await getData();
+  return result;
+};
+
 const addData = async (data) => {
   const addData = async () => {
     const result = await petugas.addPetugas(data);
@@ -43,6 +52,7 @@ const updateData = async (data) => {
 
 module.exports = {
   getData,
+  getDatabyId,
   addData,
   deleteData,
   updateData
