@@ -15,6 +15,7 @@ const petugases = props => {
   useEffect(() => {
     getPetugas()
   }, [])
+  console.log(petugas)
   return (
     <div>
       <Table

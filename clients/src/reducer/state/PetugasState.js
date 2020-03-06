@@ -2,11 +2,12 @@ import React, { useReducer } from "react"
 import petugasContext from "../context/petugasContext"
 import petugasReducer from "../reducer/petugasReducer"
 import firebase from "../../config/Firebase"
-import { GET_PETUGAS, SET_LOADING } from "../types"
+import { GET_PETUGAS, SET_LOADING, GET_NAMA_PETUGAS } from "../types"
 
 const PetugasState = props => {
   const initialState = {
     petugas: [],
+    nama: {},
     loading: false
   }
 
@@ -24,10 +25,27 @@ const PetugasState = props => {
         jabatan: doc.data().jabatan,
         tlpn_petugas: doc.data().tlpn_petugas
       }))
-      console.log(data)
       dispatch({
         type: GET_PETUGAS,
         data: data
+      })
+    })
+  }
+
+  const getPetugasNama = async () => {
+    setLoading()
+    await petugasStore.get().then(querySnapshot => {
+      const data = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        nm_petugas: doc.data().nm_petugas
+      }))
+      let namas = {}
+      for (var i = 0; i < data.length; i++) {
+        namas[data[i].id] = data[i].nm_petugas
+      }
+      dispatch({
+        type: GET_NAMA_PETUGAS,
+        data: namas
       })
     })
   }
@@ -74,7 +92,9 @@ const PetugasState = props => {
       value={{
         petugas: state.petugas,
         loading: state.loading,
+        nama: state.nama,
         getPetugas,
+        getPetugasNama,
         deletePetugas,
         editPetugas,
         addPetugas

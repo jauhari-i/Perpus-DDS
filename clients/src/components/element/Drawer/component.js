@@ -1,28 +1,28 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
-import GroupIcon from "@material-ui/icons/Group";
-import BookmarkIcon from "@material-ui/icons/Bookmark";
-import drawerListData from "../../../constants/drawerListData";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import React from "react"
+import { Link } from "react-router-dom"
+import clsx from "clsx"
+import { makeStyles, useTheme } from "@material-ui/core/styles"
+import Drawer from "@material-ui/core/Drawer"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import AppBar from "@material-ui/core/AppBar"
+import Toolbar from "@material-ui/core/Toolbar"
+import List from "@material-ui/core/List"
+import Typography from "@material-ui/core/Typography"
+import Divider from "@material-ui/core/Divider"
+import IconButton from "@material-ui/core/IconButton"
+import MenuIcon from "@material-ui/icons/Menu"
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
+import ChevronRightIcon from "@material-ui/icons/ChevronRight"
+import ListItem from "@material-ui/core/ListItem"
+import ListItemIcon from "@material-ui/core/ListItemIcon"
+import ListItemText from "@material-ui/core/ListItemText"
+import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount"
+import GroupIcon from "@material-ui/icons/Group"
+import BookmarkIcon from "@material-ui/icons/Bookmark"
+import drawerListData from "../../../constants/drawerListData"
+import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -90,20 +90,31 @@ const useStyles = makeStyles(theme => ({
   listItem: {
     color: "#fff"
   }
-}));
+}))
 
 export default function component(props) {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const classes = useStyles()
+  const theme = useTheme()
+  const [open, setOpen] = React.useState(false)
 
   const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleDrawerClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
+
+  const logOut = e => {
+    e.preventDefault()
+    localStorage.setItem("Login", false)
+    localStorage.removeItem("lastPath")
+    window.location.reload()
+  }
+
+  const setCurrentPath = path => {
+    localStorage.setItem("lastPath", path)
+  }
 
   return (
     <div className={classes.root}>
@@ -164,11 +175,18 @@ export default function component(props) {
         <Divider />
         <List>
           {drawerListData.map((item, index) => {
-            console.log(index);
-            console.log(index < 3);
             if (index < 3) {
               return (
-                <ListItem button key={index} component={Link} to={item.url}>
+                <ListItem
+                  button
+                  key={index}
+                  onClick={e => {
+                    e.preventDefault
+                    setCurrentPath(item.url)
+                  }}
+                  component={Link}
+                  to={item.url}
+                >
                   <ListItemIcon>
                     {index === 0 ? (
                       <BookmarkIcon className={classes.listItem} />
@@ -181,14 +199,10 @@ export default function component(props) {
                     className={classes.listItem}
                   />
                 </ListItem>
-              );
+              )
             } else {
               return (
-                <ListItem
-                  button
-                  key={index}
-                  onClick={() => console.log("Test")}
-                >
+                <ListItem button key={index} onClick={e => logOut(e)}>
                   <ListItemIcon>
                     <ExitToAppIcon className={classes.listItem} />
                   </ListItemIcon>
@@ -197,7 +211,7 @@ export default function component(props) {
                     className={classes.listItem}
                   />
                 </ListItem>
-              );
+              )
             }
           })}
         </List>
@@ -207,5 +221,5 @@ export default function component(props) {
         {props.children}
       </main>
     </div>
-  );
+  )
 }

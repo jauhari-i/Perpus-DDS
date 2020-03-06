@@ -1,7 +1,9 @@
 const petugasColumn = [
   {
     title: "Kode Petugas",
-    field: "kd_petugas"
+    field: "kd_petugas",
+    editable: "never",
+    defaultSort: "asc"
   },
   {
     title: "Nama Petugas",
