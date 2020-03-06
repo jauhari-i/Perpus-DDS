@@ -1,8 +1,8 @@
 
 const Project = require('./domain');
-const Mongo = require('../../../../helpers/databases/mongodb/db');
+const MySql = require('../../../../helpers/databases/mongodb/db');
 const config = require('../../../../infra/configs/global_config');
-const db = new Mongo(config.get('/mongoDbUrl'));
+const db = new MySql(config.get('/mysqlConfig'));
 const project = new Project(db);
 
 

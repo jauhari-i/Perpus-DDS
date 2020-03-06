@@ -12,20 +12,21 @@ class Project {
 
   //GET PEMINJAMAN
   async ViewPeminjamanList() {
-    const project = await this.query.findMany();
+    const project = await this.query.getPeminjaman();
     if (project.err) {
       return wrapper.error(new NotFoundError('Can not find list project'));
     }
 
-    const result = [];
-    project.data.map(i => {
-      const listProject = queryModel.project();
-      listProject.projectId = i.id;
-      listProject.projectName = i.nameProject;
-      result.push(listProject);
-    });
+    // const result = [];
+    // project.data.map(i => {
+    //   const listProject = queryModel.project();
+    //   listProject.projectId = i.id;
+    //   listProject.projectName = i.nameProject;
+    //   result.push(listProject);
+    // });
 
-    return wrapper.data(result);
+    console.log(project)
+    return wrapper.data(project);
   }
 
 }

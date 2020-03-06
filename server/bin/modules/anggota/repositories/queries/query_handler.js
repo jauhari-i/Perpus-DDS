@@ -5,13 +5,13 @@ const config = require('../../../../infra/configs/global_config');
 const db = new Sql(config.get('/mysqlConfig'));
 const anggota = new Anggota(db);
 
-const getAnggota1 = async () => {
-  const getData = async () => {
+const getAnggota = async () => {
+  const getAnggota = async () => {
     const result = await anggota.viewAnggota();
     return result;
   };
-  const result = await getData();
+  const result = await getAnggota();
   return result;
 };
 
-module.exports = getAnggota1;
+module.exports = getAnggota;

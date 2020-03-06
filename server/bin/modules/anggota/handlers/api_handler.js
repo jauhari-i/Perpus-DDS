@@ -8,12 +8,12 @@ const { ERROR:httpError, SUCCESS:http } = require('../../../helpers/http-status/
  */
 
 const getAnggota = async (req, res) => {
-  const getData = async () => queryHandler.getAnggota1();
+  const dataProc = async () => queryHandler.getAnggota();
   const sendResponse = async (result) => {
     (result.err) ? wrapper.response(res, 'fail', result, 'Anggota', httpError.NOT_FOUND)
       : wrapper.response(res, 'success', result, 'Anggota', http.OK);
   };
-  sendResponse(await getData());
+  sendResponse(await dataProc());
 };
 
 

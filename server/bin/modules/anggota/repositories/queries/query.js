@@ -1,4 +1,3 @@
-const wrapper = require('../../../../helpers/utils/wrapper');
 class Query {
 
   constructor(db){
@@ -7,8 +6,8 @@ class Query {
 
   async getData() {
 
-    const record = await this.db.query('SELECT * from anggota')
-    return record, wrapper.data(record);
+    const record = await this.db.query('SELECT * from anggota');
+    return record;
   }
 }
 

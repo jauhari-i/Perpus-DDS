@@ -7,6 +7,11 @@ class Query {
     this.db = db;
   }
 
+  async getCoba(parameter){
+    const recordset = await this.db.query(`Select * from anggota`)
+    return recordset
+  }
+
   async findOneUser(parameter) {
     this.db.setCollection('project');
     const recordset = await this.db.findOne(parameter);
@@ -23,7 +28,7 @@ class Query {
   }
 
   async findMany(parameter) {
-    this.db.setCollection('project');
+    this.db.setCollection('coba');
     const recordset = await this.db.findMany(parameter);
     return recordset;
   }
