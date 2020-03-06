@@ -1,15 +1,13 @@
-# Project Title
+# Perpus-DDS
 
-This Project is used to create codebase backend
+This is used to create codebase backend of Perpus-DDS.
 
 ### Prerequisites
 
 What things you need to install the software and how to install them
 
 ```
-Give examples
-Node.js
-Node Package Manager
+NPM, Nodejs
 ....
 ```
 
@@ -74,7 +72,7 @@ Add additional notes about how to deploy this on a live system
 
 ### License
 
-This project is licensed under Telkom Indonesia License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under Telkom Indonesia License - see the [LICENSE.md](LICENSE) file for details
 
 ### Acknowledgments
 
