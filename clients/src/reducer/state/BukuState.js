@@ -29,8 +29,8 @@ const AnggotaState = props => {
         nm_buku: doc.data().nm_buku,
         pengarang: doc.data().pengarang,
         penerbit: doc.data().penerbit,
-        tarif: doc.data().tarif,
-        durasi: doc.data().durasi
+        tarif: doc.data().tarif.toString(),
+        durasi: doc.data().durasi.toLocaleDateString()
       }));
       dispatch({
         type: GET_BUKU,
@@ -41,12 +41,13 @@ const AnggotaState = props => {
 
   const addBuku = newData => {
     let nData = newData;
+    let tarifInt = parseInt(newData.tarif);
     ref
       .add({
         nm_buku: nData.nm_buku,
         pengarang: nData.pengarang,
         penerbit: nData.penerbit,
-        tarif: nData.tarif,
+        tarif: tarifInt,
         durasi: nData.durasi
       })
       .then(() => getBuku())
@@ -61,7 +62,7 @@ const AnggotaState = props => {
         pengarang: newData.pengarang,
         penerbit: newData.penerbit,
         tarif: newData.tarif,
-        durasi: newData.durasi
+        durasi: newData.durasi.toLocaleDateString()
       })
       .then(() => getBuku())
       .catch(err => console.error("Error"));

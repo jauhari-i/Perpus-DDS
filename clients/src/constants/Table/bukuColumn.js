@@ -15,12 +15,12 @@ const bukuColumn = [
   {
     title: "Tarif",
     field: "tarif",
-    type: "numeric"
+    type: "currency"
   },
   {
     title: "Durasi",
     field: "durasi",
-    type: "numeric"
+    type: "date"
   }
 ];
 
