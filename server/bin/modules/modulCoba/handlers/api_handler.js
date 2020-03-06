@@ -11,7 +11,7 @@ const getProjectList = async (req, res) => {
   sendResponse(await getData());
 };
 
-const getHelloword = async ( res) => {
+const getHelloword = async (req, res) => {
   // console.log(req.params)
   // const {id} = req.params;
   const getData = async () => queryHandler.getHelloword();
