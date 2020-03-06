@@ -1,7 +1,8 @@
 const anggotaColumn = [
   {
     title: "Kode Anggota",
-    field: "kode_anggota"
+    field: "kode_anggota",
+    editable: "never"
   },
   {
     title: "Nama Anggota",
