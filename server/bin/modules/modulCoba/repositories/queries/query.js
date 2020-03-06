@@ -6,28 +6,23 @@ class Query {
   }
 
   async getCoba(parameter) {
-    const dataGet = await this.db.query(`Select * from anggota`);
-    return dataGet;
+    const data = await this.db.query(`Select * from anggota`);
+    return data;
   }
 
-  async getCobaId(id_anggota) {
-    const dataGetId = await this.db.query(
-      `select * from anggota where id_anggota=` + id_anggota
+  async getCobaId(parameter) {
+    const data = await this.db.query( 
+      `select * from anggota where kd_anggota=` + parameter
     );
     //console.log(dataGetId);
-    return dataGetId;
+    return data;
   }
 
   async postCoba(parameter) {
-    const InsertGet = await this.db.query(`insert into anggota set ?`, [
-      parameter.nm_anggota,
-      parameter.alamat,
-      parameter.tlpn,
-      parameter.email_anggota,
-      parameter.ps_anggota
-    ]);
+    const data = await this.db.query(`INSERT INTO anggota (nm_anggota, alamat, tlpn, email_anggota, ps_anggota) 
+            VALUES ('`+parameter.nm_anggota+`','`+parameter.alamat+`' , '`+parameter.tlpn+`', '`+parameter.email_anggota+`', '`+parameter.ps_anggota+`');`);
     //console.log(parameter);
-    return InsertGet;
+    return data;
   }
 }
 

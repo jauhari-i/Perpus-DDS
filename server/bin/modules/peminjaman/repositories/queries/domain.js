@@ -12,21 +12,12 @@ class Project {
 
   //GET PEMINJAMAN
   async ViewPeminjamanList() {
-    const project = await this.query.getPeminjaman();
-    if (project.err) {
-      return wrapper.error(new NotFoundError('Can not find list project'));
+    const pinjam = await this.query.getPeminjaman();
+    if (pinjam.err) {
+      return wrapper.error(new NotFoundError('Can not find list pinjam'));
     }
-
-    // const result = [];
-    // project.data.map(i => {
-    //   const listProject = queryModel.project();
-    //   listProject.projectId = i.id;
-    //   listProject.projectName = i.nameProject;
-    //   result.push(listProject);
-    // });
-
-    console.log(project)
-    return wrapper.data(project);
+    console.log(pinjam)
+    return wrapper.data(pinjam);
   }
 
 }

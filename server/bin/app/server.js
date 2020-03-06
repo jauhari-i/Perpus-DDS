@@ -49,42 +49,18 @@ function AppServer() {
   // // authenticated client can access the end point, place code bellow
 
   // ANGGOTA
-  this.server.get(
-    "/anggota",
-    basicAuth.isAuthenticated,
-    anggotaHandler.getAnggota
-  );
-  this.server.get(
-    "/anggota/:userId",
-    basicAuth.isAuthenticated,
-    anggotaHandler.getAnggota
-  );
+  this.server.get("/anggota", basicAuth.isAuthenticated, anggotaHandler.getAnggota);
+  this.server.get("/anggota/:userId", basicAuth.isAuthenticated, anggotaHandler.getAnggota);
 
   // GET modulCOBA
-  this.server.get(
-    "/api/hello",
-    basicAuth.isAuthenticated,
-    cobaHandler.getHelloword
-  );
+  this.server.get("/api/hello", basicAuth.isAuthenticated, cobaHandler.getHelloword);
 
-  this.server.get(
-    "/api/helloid/:id_anggota",
-    basicAuth.isAuthenticated,
-    cobaHandler.getHellowordId
-  );
+  this.server.get("/api/helloid/:id_anggota", basicAuth.isAuthenticated, cobaHandler.getHellowordId);
 
-  this.server.post(
-    "/api/hello",
-    basicAuth.isAuthenticated,
-    cobaHandler.insertHelloword
-  );
+  this.server.post("/api/hello", basicAuth.isAuthenticated, cobaHandler.insertHelloword);
 
   // PEMINJAMAN
-  this.server.get(
-    "/peminjaman",
-    basicAuth.isAuthenticated,
-    peminjamanHandler.getPeminjaman
-  );
+  this.server.get("/peminjaman", basicAuth.isAuthenticated, peminjamanHandler.getPeminjaman);
   // this.server.get('/peminjaman', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
 }
 
