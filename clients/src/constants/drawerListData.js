@@ -13,6 +13,10 @@ const drawerListData = [
     name: "Petugas",
     icon: "SupervisorAccount",
     url: "/petugas"
+  },
+  {
+    name: "Logout",
+    icon: "ExitToApp"
   }
 ];
 
