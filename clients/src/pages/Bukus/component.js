@@ -1,19 +1,20 @@
-import React, { useContext, useEffect } from "react";
-import Table from "../../components/element/Table";
-import bukuContext from "../../reducer/context/bukuContext";
-import { tableColumn } from "../../constants/Table";
+import React, { useContext, useEffect } from "react"
+import Table from "../../components/element/Table"
+import bukuContext from "../../reducer/context/bukuContext"
+import { tableColumn } from "../../constants/Table"
 
 const bukus = props => {
-  const Buku = useContext(bukuContext);
-  const { getBuku, data, deleteData, addBuku, editBuku } = Buku;
+  const Buku = useContext(bukuContext)
+  const { getBuku, data, deleteData, addBuku, editBuku, loading } = Buku
   useEffect(() => {
-    getBuku();
-  }, []);
+    getBuku()
+  }, [])
   if (data) {
     return (
       <div>
         <Table
           title="Buku"
+          loading={loading}
           columns={tableColumn.BukuColumn}
           data={data}
           delete={deleteData}
@@ -21,9 +22,9 @@ const bukus = props => {
           edit={editBuku}
         />
       </div>
-    );
+    )
   }
-  return <div></div>;
-};
+  return <div></div>
+}
 
-export default bukus;
+export default bukus

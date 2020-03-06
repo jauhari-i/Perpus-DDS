@@ -20,8 +20,8 @@ const bukuColumn = [
   {
     title: "Durasi",
     field: "durasi",
-    type: "numeric"
+    type: "date"
   }
-];
+]
 
-export default bukuColumn;
+export default bukuColumn

@@ -202,7 +202,16 @@ export default function component(props) {
               )
             } else if (index === 3) {
               return (
-                <ListItem button key={index} component={Link} to={item.url}>
+                <ListItem
+                  button
+                  key={index}
+                  onClick={e => {
+                    e.preventDefault
+                    setCurrentPath(item.url)
+                  }}
+                  component={Link}
+                  to={item.url}
+                >
                   <ListItemIcon>
                     <MenuBookIcon className={classes.listItem} />
                   </ListItemIcon>
