@@ -8,6 +8,7 @@ const wrapper = require('../helpers/utils/wrapper');
 
 const anggotaHandler = require('../modules/anggota/handlers/api_handler');
 const peminjamanHandler = require('../modules/peminjaman/handlers/api_handler')
+const cobaHandler = require('../modules/modulCoba/handlers/api_handler');
 
 function AppServer() {
   this.server = restify.createServer({
@@ -46,6 +47,9 @@ function AppServer() {
   // ANGGOTA
   this.server.get('/anggota', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
   this.server.get('/anggota/:userId', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
+
+  // BISA GET DI CONSOL.LOG
+  this.server.get('/api/hello', basicAuth.isAuthenticated, cobaHandler.getHelloword);
 
   // PEMINJAMAN
   this.server.get('/peminjaman', basicAuth.isAuthenticated, peminjamanHandler.getPeminjaman);
