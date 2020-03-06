@@ -16,4 +16,6 @@ const petugasColumn = [
     field: "tlpn_petugas",
     type: "numeric"
   }
-];
+]
+
+export default petugasColumn

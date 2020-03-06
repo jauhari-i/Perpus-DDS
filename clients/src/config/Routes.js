@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom"
 import { pages } from "../pages"
 import Drawer from "../components/element/Drawer"
 import AnggotaState from "../reducer/state/AnggotaState"
+import PetugasState from "../reducer/state/PetugasState"
 
 export class Routes extends Component {
   constructor(props) {
@@ -27,20 +28,22 @@ export class Routes extends Component {
   _RenderApp() {
     return (
       <Drawer>
-        <Switch>
-          <Redirect from="/login" to="/" />
-          <Route exact path="/" component={pages.Home} />
-          <Route exact path="/test" component={pages.DummyPage} />
-          <Route exact path="/peminjam" component={pages.Peminjams} />
-          <Route exact path="/petugas" component={pages.Petugases} />
-          <AnggotaState>
-            <Route exact path="/anggota" component={pages.Anggotas} />
-          </AnggotaState>
-          <Route exact path="/peminjam/:id" component={pages.Peminjam} />
-          <Route exact path="/petugas/:id" component={pages.Petugas} />
-          <Route exact path="/anggota/:id" component={pages.Anggota} />
-          <Route component={pages.Error404} />
-        </Switch>
+        <AnggotaState>
+          <PetugasState>
+            <Switch>
+              <Redirect from="/login" to="/" />
+              <Route exact path="/" component={pages.Home} />
+              <Route exact path="/test" component={pages.DummyPage} />
+              <Route exact path="/peminjam" component={pages.Peminjams} />
+              <Route exact path="/petugas" component={pages.Petugases} />
+              <Route exact path="/anggota" component={pages.Anggotas} />
+              <Route exact path="/peminjam/:id" component={pages.Peminjam} />
+              <Route exact path="/petugas/:id" component={pages.Petugas} />
+              <Route exact path="/anggota/:id" component={pages.Anggota} />
+              <Route component={pages.Error404} />
+            </Switch>
+          </PetugasState>
+        </AnggotaState>
       </Drawer>
     )
   }

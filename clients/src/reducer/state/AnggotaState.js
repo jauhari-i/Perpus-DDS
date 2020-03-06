@@ -3,28 +3,32 @@ import axios from "../../config/axios-config"
 import firebase from "../../config/Firebase"
 import anggotaContext from "../context/anggotaContext"
 import anggotaReducer from "../reducer/anggotaReducer"
-import { GET_ANGGOTA } from "../types"
+import { GET_ANGGOTA, SET_LOADING } from "../types"
 
 const AnggotaState = props => {
   const ref = firebase.firestore().collection("anggota")
 
   const initialState = {
-    data: []
+    data: [],
+    loading: false
   }
 
   const [state, dispatch] = useReducer(anggotaReducer, initialState)
 
-  const deleteData = oldData => {
-    console.log(oldData)
-    ref
+  const setLoading = () => dispatch({ type: SET_LOADING })
+
+  const deleteData = async oldData => {
+    setLoading()
+    await ref
       .doc(oldData.id)
       .delete()
       .then(() => getAnggota())
       .catch(err => console.error(err))
   }
 
-  const getAnggota = () => {
-    ref.get().then(querySnapshot => {
+  const getAnggota = async () => {
+    setLoading()
+    await ref.get().then(querySnapshot => {
       const data = querySnapshot.docs.map(doc => ({
         id: doc.id,
         kode_anggota: doc.data().kode_anggota,
@@ -39,9 +43,10 @@ const AnggotaState = props => {
     })
   }
 
-  const addAnggota = newData => {
+  const addAnggota = async newData => {
     let nData = newData
-    ref
+    setLoading()
+    await ref
       .add({
         kode_anggota: `AG${state.data.length}`,
         nama_anggota: nData.nama_anggota,
@@ -52,8 +57,9 @@ const AnggotaState = props => {
       .catch(error => console.error("Error adding to database"))
   }
 
-  const editAnggota = (newData, oldData) => {
-    ref
+  const editAnggota = async (newData, oldData) => {
+    setLoading()
+    await ref
       .doc(oldData.id)
       .set({
         kode_anggota: newData.kode_anggota,
@@ -69,6 +75,7 @@ const AnggotaState = props => {
     <anggotaContext.Provider
       value={{
         data: state.data,
+        loading: state.loading,
         deleteData,
         getAnggota,
         addAnggota,

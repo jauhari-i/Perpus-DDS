@@ -1,17 +1,18 @@
 import React, { useState, useContext, useEffect } from "react"
-import {
-  _GetAnggotaAll,
-  _AddAnggota,
-  _EditAnggota,
-  _DeleteAnggota
-} from "../../function/anggotaFunction"
 import Table from "../../components/element/Table"
 import anggotaContext from "../../reducer/context/anggotaContext"
 import { tableColumn } from "../../constants/Table"
 
 const anggotas = props => {
   const Anggota = useContext(anggotaContext)
-  const { getAnggota, data, deleteData, addAnggota, editAnggota } = Anggota
+  const {
+    getAnggota,
+    data,
+    deleteData,
+    addAnggota,
+    editAnggota,
+    loading
+  } = Anggota
   useEffect(() => {
     getAnggota()
   }, [])
@@ -25,6 +26,7 @@ const anggotas = props => {
           delete={deleteData}
           add={addAnggota}
           edit={editAnggota}
+          loading={loading}
         />
       </div>
     )
