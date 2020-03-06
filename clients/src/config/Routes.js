@@ -5,7 +5,7 @@ import Drawer from "../components/element/Drawer"
 import AnggotaState from "../reducer/state/AnggotaState"
 import PetugasState from "../reducer/state/PetugasState"
 import PeminjamState from "../reducer/state/PeminjamState"
-
+import BukuState from "../reducer/state/BukuState"
 export class Routes extends Component {
   constructor(props) {
     super(props)
