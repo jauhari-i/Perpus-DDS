@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import MaterialTable from "material-table";
-import EditIcon from "@material-ui/icons/Edit";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import DeleteIcon from "@material-ui/icons/Delete";
-import CheckIcon from "@material-ui/icons/Check";
-import ClearIcon from "@material-ui/icons/Clear";
-import { green } from "@material-ui/core/colors";
+import React, { useState } from "react"
+import MaterialTable from "material-table"
+import EditIcon from "@material-ui/icons/Edit"
+import AddCircleIcon from "@material-ui/icons/AddCircle"
+import DeleteIcon from "@material-ui/icons/Delete"
+import CheckIcon from "@material-ui/icons/Check"
+import ClearIcon from "@material-ui/icons/Clear"
+import { green } from "@material-ui/core/colors"
 
 const table = props => {
-  let [selectedRow, setSelectedRow] = useState(null);
+  let [selectedRow, setSelectedRow] = useState(null)
 
   const optionConfig = {
     pageSize: 10,
@@ -20,7 +20,7 @@ const table = props => {
           ? "#EEE"
           : "#FFF"
     })
-  };
+  }
 
   const iconsConfig = {
     Add: props => <AddCircleIcon color="primary" />,
@@ -28,22 +28,22 @@ const table = props => {
     Delete: props => <DeleteIcon color="secondary" />,
     Check: props => <CheckIcon style={{ color: green[500] }} />,
     Clear: props => <ClearIcon color="secondary" />
-  };
+  }
 
   const _AddHandler = (newData, resolve) => {
-    props.add(newData);
-    resolve();
-  };
+    props.add(newData)
+    resolve()
+  }
   const _EditHandler = (newData, oldData, resolve) => {
     if (oldData) {
-      props.edit(newData, oldData);
+      props.edit(newData, oldData)
     }
-    resolve();
-  };
+    resolve()
+  }
   const _DeleteHandler = (oldData, resolve) => {
-    props.delete(oldData);
-    resolve();
-  };
+    props.delete(oldData)
+    resolve()
+  }
   return (
     <MaterialTable
       isLoading={props.loading}
@@ -53,15 +53,15 @@ const table = props => {
       editable={{
         onRowAdd: newData =>
           new Promise(resolve => {
-            _AddHandler(newData, resolve);
+            _AddHandler(newData, resolve)
           }),
         onRowUpdate: (newData, oldData) =>
           new Promise(resolve => {
-            _EditHandler(newData, oldData, resolve);
+            _EditHandler(newData, oldData, resolve)
           }),
         onRowDelete: oldData =>
           new Promise(resolve => {
-            _DeleteHandler(oldData, resolve);
+            _DeleteHandler(oldData, resolve)
           })
       }}
       onRowClick={(evt, selectedRow) =>
@@ -70,7 +70,7 @@ const table = props => {
       options={optionConfig}
       icons={iconsConfig}
     />
-  );
-};
+  )
+}
 
-export default table;
+export default table
