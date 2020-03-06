@@ -12,7 +12,7 @@ class Query {
   async postPetugas(data){
     const recordset = await this.db.query(
     `INSERT INTO petugas (nm_petugas,jabatan,tlpn_petugas,email_petugas,ps_petugas) 
-    VALUES ('',`+data.nama+`,`+data.jabatan+`,`+data.telp+`,`+data.email+`,`+data.pass+`)`)
+    VALUES (''',`+data.nama+`','`+data.jabatan+`','`+data.telp+`','`+data.email+`','`+data.pass+`')`)
     console.log(recordset);
     
     return recordset

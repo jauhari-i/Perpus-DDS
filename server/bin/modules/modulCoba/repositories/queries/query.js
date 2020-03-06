@@ -1,38 +1,34 @@
-
-const ObjectId = require('mongodb').ObjectId;
+//const ObjectId = require("mongodb").ObjectId;
 
 class Query {
-
   constructor(db) {
     this.db = db;
   }
 
-  async getCoba(parameter){
-    const recordset = await this.db.query(`Select * from anggota`)
-    return recordset
+  async getCoba(parameter) {
+    const dataGet = await this.db.query(`Select * from anggota`);
+    return dataGet;
   }
 
-  async findOneUser(parameter) {
-    this.db.setCollection('project');
-    const recordset = await this.db.findOne(parameter);
-    return recordset;
+  async getCobaId(id_anggota) {
+    const dataGetId = await this.db.query(
+      `select * from anggota where id_anggota=` + id_anggota
+    );
+    //console.log(dataGetId);
+    return dataGetId;
   }
 
-  async findById(id) {
-    this.db.setCollection('project');
-    const parameter = {
-      _id: ObjectId(id)
-    };
-    const recordset = await this.db.findOne(parameter);
-    return recordset;
+  async postCoba(parameter) {
+    const InsertGet = await this.db.query(`insert into anggota set ?`, [
+      parameter.nm_anggota,
+      parameter.alamat,
+      parameter.tlpn,
+      parameter.email_anggota,
+      parameter.ps_anggota
+    ]);
+    //console.log(parameter);
+    return InsertGet;
   }
-
-  async findMany(parameter) {
-    this.db.setCollection('coba');
-    const recordset = await this.db.findMany(parameter);
-    return recordset;
-  }
-
 }
 
 module.exports = Query;
