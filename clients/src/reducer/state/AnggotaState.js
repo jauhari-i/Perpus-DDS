@@ -25,8 +25,6 @@ const AnggotaState = props => {
 
   const getAnggota = () => {
     ref.get().then(querySnapshot => {
-      console.log("QSS");
-      console.log(querySnapshot);
       const data = querySnapshot.docs.map(doc => ({
         id: doc.id,
         kode_anggota: doc.data().kode_anggota,
