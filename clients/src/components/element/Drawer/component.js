@@ -21,6 +21,7 @@ import BookmarkIcon from "@material-ui/icons/Bookmark"
 import drawerListData from "../../../constants/drawerListData"
 import MenuBookIcon from "@material-ui/icons/MenuBook"
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
+import HomeIcon from "@material-ui/icons/HomeRounded"
 
 const drawerWidth = 240
 
@@ -95,7 +96,7 @@ const useStyles = makeStyles(theme => ({
 export default function component(props) {
   const classes = useStyles()
   const theme = useTheme()
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(true)
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -162,7 +163,7 @@ export default function component(props) {
       >
         <div className={classes.toolbar} style={{ backgroundColor: "#333333" }}>
           <Typography variant="h6" noWrap className={classes.listItem}>
-            Perpustakaan DDS
+            Perpus DDS
           </Typography>
           <IconButton onClick={handleDrawerClose} className={classes.listItem}>
             {theme.direction === "rtl" ? (
@@ -175,7 +176,28 @@ export default function component(props) {
         <Divider />
         <List>
           {drawerListData.map((item, index) => {
-            if (index < 3) {
+            if (index === 0) {
+              return (
+                <ListItem
+                  button
+                  key={index}
+                  onClick={e => {
+                    e.preventDefault
+                    setCurrentPath(item.url)
+                  }}
+                  component={Link}
+                  to={item.url}
+                >
+                  <ListItemIcon>
+                    <HomeIcon className={classes.listItem} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.name}
+                    className={classes.listItem}
+                  />
+                </ListItem>
+              )
+            } else if (index < 4 && index > 0) {
               return (
                 <ListItem
                   button
@@ -200,7 +222,7 @@ export default function component(props) {
                   />
                 </ListItem>
               )
-            } else if (index === 3) {
+            } else if (index === 4) {
               return (
                 <ListItem
                   button
@@ -223,15 +245,18 @@ export default function component(props) {
               )
             } else {
               return (
-                <ListItem button key={index} onClick={e => logOut(e)}>
-                  <ListItemIcon>
-                    <ExitToAppIcon className={classes.listItem} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={item.name}
-                    className={classes.listItem}
-                  />
-                </ListItem>
+                <div key={index}>
+                  <Divider />
+                  <ListItem button onClick={e => logOut(e)}>
+                    <ListItemIcon>
+                      <ExitToAppIcon className={classes.listItem} />
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={item.name}
+                      className={classes.listItem}
+                    />
+                  </ListItem>
+                </div>
               )
             }
           })}
