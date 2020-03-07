@@ -10,6 +10,7 @@ const { NotFoundError, UnauthorizedError, ConflictError } = require('../../../..
 const algorithm = 'aes-256-ctr';
 const secretKey = 'Dom@in2018';
 
+
 class User {
 
   constructor(db){

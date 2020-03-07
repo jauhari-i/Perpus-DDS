@@ -25,9 +25,10 @@ class DB {
             }
             if (err.code === 'ECONNREFUSED') {
               errorMessage = 'Database connection was refused.';
+            } else {
+              connection.release();
+              reject(wrapper.error(errorMessage));
             }
-            connection.release();
-            reject(wrapper.error(errorMessage));
           }
           else {
             connection.query(statement, (err, result) => {

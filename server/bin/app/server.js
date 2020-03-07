@@ -1,4 +1,3 @@
-
 const restify = require('restify');
 const corsMiddleware = require('restify-cors-middleware');
 const project = require('../../package.json');
@@ -7,7 +6,9 @@ const jwtAuth = require('../auth/jwt_auth_helper');
 const wrapper = require('../helpers/utils/wrapper');
 
 const anggotaHandler = require('../modules/anggota/handlers/api_handler');
-const peminjamanHandler = require('../modules/peminjaman/handlers/api_handler')
+const peminjamanHandler = require('../modules/peminjaman/handlers/api_handler');
+const petugasHandler = require('../modules/petugas/handlers/api_handler');
+const cobaHandler = require('../modules/modulCoba/handlers/api_handler');
 
 function AppServer() {
   this.server = restify.createServer({
@@ -38,18 +39,79 @@ function AppServer() {
 
   // anonymous can access the end point, place code bellow
   this.server.get('/', (req, res) => {
-    wrapper.response(res, 'success', wrapper.data('Index'), 'This service is running properly');
+    wrapper.response(
+      res,
+      'success',
+      wrapper.data('Index'),
+      'This service is running properly'
+    );
   });
 
-  // // authenticated client can access the end point, place code bellow
-
   // ANGGOTA
-  this.server.get('/anggota', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
-  this.server.get('/anggota/:userId', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
+
+  this.server.get(
+    '/anggota',
+    basicAuth.isAuthenticated,
+    anggotaHandler.getAnggota
+  );
+  this.server.get(
+    '/anggota/:userId',
+    basicAuth.isAuthenticated,
+    anggotaHandler.getAnggota
+  );
+
+  // GET modulCOBA
+  this.server.get(
+    '/api/hello',
+    basicAuth.isAuthenticated,
+    cobaHandler.getHelloword
+  );
+
+  this.server.get(
+    '/api/helloid/:id_anggota',
+    basicAuth.isAuthenticated,
+    cobaHandler.getHellowordId
+  );
+
+  this.server.post(
+    '/api/hello',
+    basicAuth.isAuthenticated,
+    cobaHandler.insertHelloword
+  );
+
 
   // PEMINJAMAN
-  this.server.get('/peminjaman', basicAuth.isAuthenticated, peminjamanHandler.getPeminjaman);
-  // this.server.get('/peminjaman', basicAuth.isAuthenticated, anggotaHandler.getAnggota);
+  this.server.get(
+    '/peminjaman',
+    basicAuth.isAuthenticated,
+    peminjamanHandler.getPeminjaman
+  );
+
+  // PETUGAS
+  this.server.get('/petugas', 
+    basicAuth.isAuthenticated, 
+    petugasHandler.getPetugas
+  );
+
+  this.server.get('/petugas/:userId', 
+    basicAuth.isAuthenticated, 
+    petugasHandler.getPetugasId
+  );
+  
+  this.server.post('/petugas/add', 
+    basicAuth.isAuthenticated, 
+    petugasHandler.addPetugas
+  );
+
+  this.server.post('/petugas/delete/:userId', 
+    basicAuth.isAuthenticated, 
+    petugasHandler.deletePetugas
+  );
+
+  this.server.post('/petugas/update/:userId', 
+    basicAuth.isAuthenticated, 
+    petugasHandler.updatePetugas
+  );
 }
 
 module.exports = AppServer;

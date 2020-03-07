@@ -1,4 +1,3 @@
-
 const Query = require('./query');
 const wrapper = require('../../../../helpers/utils/wrapper');
 const { NotFoundError } = require('../../../../helpers/error');
@@ -9,14 +8,16 @@ class Anggota {
     this.query = new Query(db);
   }
 
-  async lihatAnggota() {
-    const dbOutput = await this.query.getAnggota();
-    
-    if (dbOutput.err) {
-      return wrapper.error(new NotFoundError('Data tidak ada wow'));
+  /**
+   * @desc GET METHOD
+   */
+  
+  async viewAnggota() {
+    const anggota = await this.query.getData();
+    if (anggota.err) {
+      return wrapper.error(new NotFoundError('Data petugas tidak ada'));
     }
-
-    return wrapper.data(dbOutput);
+    return wrapper.data(anggota);
   }
 
 }
