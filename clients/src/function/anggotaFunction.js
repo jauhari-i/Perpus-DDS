@@ -24,33 +24,33 @@ export let anggota = [
     alamat: "Jl. Bunga Tulip",
     telepon: "081237492812"
   }
-];
+]
 
 // Function mulai sini!
 export const _GetAnggotaAll = () => {
   return {
     data: anggota
-  };
-};
+  }
+}
 
 export const _GetAnggotaById = id => {
-  let data = anggota.find(({ kode_anggota }) => kode_anggota === id);
+  let data = anggota.find(({ kode_anggota }) => kode_anggota === id)
   return {
     data: data
-  };
-};
+  }
+}
 
 export const _AddAnggota = newData => {
-  anggota.push(newData);
-  return { data: anggota };
-};
+  anggota.push(newData)
+  return { data: anggota }
+}
 
 export const _EditAnggota = (newData, oldData) => {
-  anggota[anggota.indexOf(oldData)] = newData;
-  return { data: anggota };
-};
+  anggota[anggota.indexOf(oldData)] = newData
+  return { data: anggota }
+}
 
 export const _DeleteAnggota = newData => {
-  anggota.splice(anggota.indexOf(newData), 1);
-  return { data: anggota };
-};
+  anggota.splice(anggota.indexOf(newData), 1)
+  return { data: anggota }
+}

@@ -1,1 +1,1 @@
-export { default } from "./anggotas"
+export { default } from "./component"

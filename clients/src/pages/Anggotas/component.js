@@ -1,40 +1,37 @@
-import React, { Component } from "react"
-import {
-  _GetAnggotaAll,
-  _AddAnggota,
-  _EditAnggota,
-  _DeleteAnggota
-} from "../../function/anggotaFunction"
+import React, { useContext, useEffect } from "react"
 import Table from "../../components/element/Table"
+import anggotaContext from "../../reducer/context/anggotaContext"
 import { tableColumn } from "../../constants/Table"
 
-export default class component extends Component {
-  onClickFunctionAdd(newData) {
-    const added = _AddAnggota(newData)
-    return added.data
-  }
-
-  onClickFunctionEdit(newData, oldData) {
-    const updated = _EditAnggota(newData, oldData)
-    return updated.data
-  }
-
-  onClickFunctionDelete(oldData) {
-    const deletes = _DeleteAnggota(oldData)
-    return deletes.data
-  }
-
-  render() {
-    const dataAll = _GetAnggotaAll().data
+const component = props => {
+  const Anggota = useContext(anggotaContext)
+  const {
+    getAnggota,
+    data,
+    deleteData,
+    addAnggota,
+    editAnggota,
+    loading
+  } = Anggota
+  useEffect(() => {
+    getAnggota()
+  }, [])
+  if (data) {
     return (
-      <Table
-        title="Anggota"
-        columns={tableColumn.AnggotaColumn}
-        data={dataAll}
-        add={this.onClickFunctionAdd}
-        deletes={this.onClickFunctionDelete}
-        edit={this.onClickFunctionEdit}
-      />
+      <div>
+        <Table
+          title="Anggota"
+          columns={tableColumn.AnggotaColumn}
+          data={data}
+          delete={deleteData}
+          add={addAnggota}
+          edit={editAnggota}
+          loading={loading}
+        />
+      </div>
     )
   }
+  return <div className=""></div>
 }
+
+export default component
