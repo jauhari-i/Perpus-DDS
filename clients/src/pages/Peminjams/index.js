@@ -1,1 +1,1 @@
-export { default } from "./peminjams"
+export { default } from "./component"

@@ -1,94 +1,62 @@
-import React, { Component } from "react";
-import {
-  _GetPeminjamAll,
-  _AddPeminjam,
-  _EditPeminjam,
-  _DeletePeminjam
-} from "../../function/peminjamFunction";
+import React, { useContext, useEffect } from "react"
+import pinjamContext from "../../reducer/context/peminjamContext"
+import Table from "../../components/element/Table"
+import petugasContext from "../../reducer/context/petugasContext"
+const component = () => {
+  const context = useContext(pinjamContext)
+  const petugasContextes = useContext(petugasContext)
+  const {
+    peminjam,
+    getPinjam,
+    loading,
+    getNamaAnggota,
+    nama_anggota,
+    editPeminjam,
+    addPeminjam,
+    deletePeminjam
+  } = context
+  const { petugas, getPetugas, getPetugasNama, nama } = petugasContextes
 
-export default class component extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      peminjam: []
-    };
-  }
-
-  componentDidMount() {
-    // Untuk function _GetPeminjamAll()
-    console.log(_GetPeminjamAll());
-    this.setState({
-      peminjam: _GetPeminjamAll().data
-    });
-  }
-
-  onClickFunction() {
-    // Untuk function _AddPeminjam()
-    const data = {
-      no_pinjam: "4",
-      nama_anggota: "Aufakkkk",
-      nama_petugas: "Lord Aufa",
-      tgl_pinjam: "17/01/2020"
-    };
-    let post = _AddPeminjam(data);
-    this.setState({ peminjam: post.data });
-  }
-
-  onClickFunctionDelete(id) {
-    let deletes = _DeletePeminjam(id);
-    this.setState({
-      peminjam: deletes.data
-    });
-  }
-
-  onClickFunctionEdit(id) {
-    const data = {
-      no_pinjam: "4",
-      nama_anggota: "Aufakkkk",
-      nama_petugas: "Lord Aufa manuk e lemes",
-      tgl_pinjam: "17/01/2020"
-    };
-    let put = _EditPeminjam({ id, data });
-    this.setState({
-      peminjam: put.data
-    });
-  }
-
-  render() {
-    return (
-      <section>
-        <button onClick={() => this.onClickFunction()}>Add</button>
-        <table>
-          <thead>
-            <tr>
-              <th>No. Pinjam</th>
-              <th>Nama Anggota</th>
-              <th>Nama Petugas</th>
-              <th>Tanggal Pinjam</th>
-              <th>Opsi</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.peminjam.map((item, id) => (
-              <tr key={id}>
-                <td>{item.no_pinjam}</td>
-                <td>{item.nama_anggota}</td>
-                <td>{item.nama_petugas}</td>
-                <td>{item.tgl_pinjam}</td>
-                <td>
-                  <button onClick={() => this.onClickFunctionDelete(id)}>
-                    Delete
-                  </button>
-                  <button onClick={() => this.onClickFunctionEdit(id)}>
-                    Edit
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
-    );
-  }
+  useEffect(() => {
+    getPinjam(), getPetugas(), getPetugasNama(), getNamaAnggota()
+  }, [])
+  const column = [
+    {
+      title: "No Pinjam",
+      field: "no_pinjam",
+      editable: "never",
+      type: "numeric",
+      defaultSort: "asc"
+    },
+    {
+      title: "Nama Anggota",
+      field: "nama_anggota",
+      lookup: nama_anggota
+    },
+    {
+      title: "Nama Petugas",
+      field: "nama_petugas",
+      lookup: nama
+    },
+    {
+      title: "Tanggal Pinjam",
+      field: "tgl_pinjam",
+      type: "datetime"
+    }
+  ]
+  return (
+    <div>
+      <Table
+        title="Peminjam"
+        data={peminjam}
+        loading={loading}
+        columns={column}
+        edit={editPeminjam}
+        add={addPeminjam}
+        delete={deletePeminjam}
+      />
+    </div>
+  )
 }
+
+export default component

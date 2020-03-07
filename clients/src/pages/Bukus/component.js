@@ -3,6 +3,23 @@ import Table from "../../components/element/Table"
 import bukuContext from "../../reducer/context/bukuContext"
 import { tableColumn } from "../../constants/Table"
 import { TextField } from "@material-ui/core"
+import { makeStyles } from "@material-ui/core/styles"
+
+const useStyle = makeStyles(theme => ({
+  number: {
+    "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
+      "-webkit-appearance": "none",
+      margin: 0
+    }
+  },
+  input: {
+    "&::-webkit-outer-spin-button, &::-webkit-inner-spin-button": {
+      "-webkit-appearance": "none"
+    },
+    fontSize: 13,
+    marginTop: 5
+  }
+}))
 
 const bukus = props => {
   const Buku = useContext(bukuContext)
@@ -10,6 +27,7 @@ const bukus = props => {
   useEffect(() => {
     getBuku()
   }, [])
+  const classes = useStyle()
   const columns = [
     {
       title: "Nama Buku",
@@ -37,6 +55,11 @@ const bukus = props => {
         <TextField
           type="number"
           placeholder="Tarif"
+          size="small"
+          fullWidth
+          InputProps={{
+            inputProps: { min: 0, max: 9999999999999, className: classes.input }
+          }}
           value={props.value}
           onChange={e => props.onChange(e.target.value)}
         />

@@ -1,1 +1,1 @@
-export { default } from "./petugases"
+export { default } from "./component"
